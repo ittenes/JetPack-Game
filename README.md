@@ -122,8 +122,9 @@ it's a copy of the famous game JetPack
         ElementRocket
         ElementElectricHurdle
         ElementLaser 
-        ObjetCoin
-        ObjetArmor
+        ObjectCoin
+        ObjectArmor
+        Objectlife
 
      
     playTheGame
@@ -131,15 +132,14 @@ it's a copy of the famous game JetPack
     pauseTheGame
     finishTheGame        
     
-    startLifeCounter
+    showLifeCounter
     showTheScore
-    drowCoins
-    drowBigCoins
+    drawCoins
+    drawBigCoins
     lunchRocket
-    drowElcectricHurdle
-    drowLaser
-    drowEnemy
-    
+    drawElcectricHurdle
+    drawLaser
+    drawEnemy
 
     
 ### class ElementBackground
@@ -158,7 +158,7 @@ it's a copy of the famous game JetPack
 
 ### class ElementEnemy
     run
-    changedirection 
+    changeDirection 
     runAway
     death
 
@@ -166,27 +166,30 @@ it's a copy of the famous game JetPack
     move
     followTheCharacter
     warnThePosition
-    hitTheCharacter
+    collisionTheCharacter
     
 ### class ElementElectricHurdle
     turnClockwise
-    hitTheCharacter
+    collisionTheCharacter
 
 ### class ElementLaser 
     move
     turnOn
     turnOff
-    hitTheCharacter
+    collisionTheCharacter
     
-### class ObjetCoin
+### class ObjectCoin
     move
     addScore
     
-### class ObjetArmor
+### class ObjectArmor
     move
     changeElemntCharacter
 
-    
+### class ObjectLife
+    move
+    addNewLife
+
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)
