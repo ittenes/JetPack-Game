@@ -101,8 +101,94 @@ it's a copy of the famous game JetPack
 
 
 ## Data structure
-Classes and methods definition.
 
+### class Game
+    ScreenSplash
+    PlayGame
+    StopGame
+    PauseGame
+    GameOver
+
+### class ScreenSplash
+    goToPlay
+        PlayGame
+    goToHowToPlay
+
+### class PlayGame
+    startBackground
+        ElementBackground
+    startCharacter
+        ElementCharacter
+    startEnemy
+        ElementEnemy
+    startRocket
+        ElementRocket
+    startElectricHurdle
+        ElementElectricHurdle
+    startLaser
+        ElementLaser 
+    startScore
+    startBigCoin
+    startCoin
+    startLive
+    startTimeLoop
+
+### class StopGame
+    stopGame
+    playTheGame
+
+### class PauseGame
+    puseGame
+    restartGame
+    
+### class ElementBackground
+    defineCeiling
+    defineGround
+    defineBackground
+    moveBackgound
+    
+### class ElementCharacter
+    run
+    flyUp
+    flyDown
+    shoot
+    death 
+    getObjets
+
+### class ElementEnemy
+    run
+    changedirection 
+    runAway
+    death
+
+### class ElementRocket
+    move
+    followTheCharacter
+    warnThePosition
+    hitTheCharacter
+    
+### class ElementElectricHurdle
+    turnClockwise
+     hitTheCharacter
+
+### class  ElementLaser 
+    Move
+    TurnOn
+    TurnOff
+    hitTheCharacter
+    
+### class ObjetCoin
+    move
+    addScore
+    
+### class ObjetBigCoin
+    move
+    addScore
+    
+### class ObjetArmor
+    move
+    changeElemntCharacter
+    
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)
