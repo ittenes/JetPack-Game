@@ -103,7 +103,7 @@ it's a copy of the famous game JetPack
 ## Data structure
 
 ### class App
-    showScreenPopUp
+    showPopUp
     playGame
     stopGame
     pauseGame
@@ -111,8 +111,8 @@ it's a copy of the famous game JetPack
 
 ### class ScreenPopUP
     showText
-    goToPlay
-    stopThePlay
+    confirm
+    stop
 
 ### class GameJetPack
     init
