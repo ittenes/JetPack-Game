@@ -2,9 +2,104 @@
 it's a copy of the famous game JetPack
 
 ## MVP (DOM - CANVAS)
-MVP definition, deliverables.
+### GENERAL
+MVP definition, deliverables.	* MVP 
 
-## Backlog
+     * Screen Start
+
+         * Play button
+## Backlog	    * Screen Game
+
+         * Pause / Go
+        * Score
+    * Screen game over
+        * Re-start Button
+* N2H
+    * Lives
+        * 3 live
+    * Fases
+    * 3 scenes for Fase
+
+
+ ### BACKGROUND
+* MVP
+    * Ceiling
+    * Ground
+    * Go forward 
+* N2H
+    * Go forward with different backgrounds and velocity 
+    * The backgrounds have different designs for different levels.
+    * The speed is proportional to the playing time
+
+ ### PLAYBILITY
+* MPV
+    * Get coins 
+    * 1 coin = 1 point
+    * If there are lasers, there are not electrical hurdle and rockets
+    * Max 5 rockets at the same time
+    * 
+* N2H
+    * Get element live 
+        * Add a extra live
+        * You can get more live until 5
+    * Get super coint
+        * Add 25 points 
+    * Get go forward fast
+        * Jump to the new fase
+    * Get 2 different armor
+        * Transform the character ability
+
+
+ ### CHARACTER 01 Basic
+* MPV
+    * Run only if he is on the ground 
+    * Fly if push the button
+    * He use the rocket when is flying 
+    * He have a little acceleration when pus the button
+    * If you don’t push the button fly he fall down same velocity 
+* N2H
+    * He have a little acceleration when push the button
+    * The rocket shoot to the bad guys
+    * Death Animation 
+    *  CHARACTER 02 Head down N2H
+        * Run only if he is on the ground 
+        * Run in the ceiling
+        * Push the button fly chage the position Ground to Ceiling/Ceiling to Ground
+        * You can press button fly at any time of the way between the Ground to Ceiling and change the dirección 
+    *  CHARACTER 03 Robot N2H
+        * He runs only if he is on the ground 
+        * He flies very slowy if push the button fly
+        * If you don’t push the button fly he fall down fast
+        * Kill the badguy when you are hit the ground.
+
+ ### BAD GUY
+* MPV
+    * Run over the ground
+    * Run everywhere and direction
+* N2H
+    * If you are shooting they try run away
+    * Death Animation 
+
+ ### ELEMENT >> ROCKET 
+* MPV
+    * they cross the screen
+    * If it touches the character it kills it
+* N2H
+    * you can see a alert where the rocket will come from
+    * The alert follows your position a few seconds
+
+ ### ELEMENTO >> ELECTRICAL HURDLE
+* MPV
+    * Fixed element 
+    * if the character touch it, he die
+* N2H
+     * It moves like a clock
+
+ ### ELEMENT >> LASER
+* N2H
+   * They can came por diferent side of the screen
+   * when get the correct possition - turns on
+   * if the character touch it, he die
 
 
 ## Data structure
