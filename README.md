@@ -34,7 +34,9 @@ it's a copy of the famous game JetPack
     * 1 coin = 1 point
     * If there are lasers, there are not electrical hurdle and rockets
     * Max 5 rockets at the same time
-    * 
+    * Max 3 electrical hurdles at the same time
+    * Max 6 lasers at the same time
+    
 * N2H
     * Get element live 
         * Add a extra live
@@ -45,7 +47,6 @@ it's a copy of the famous game JetPack
         * Jump to the new fase
     * Get 2 different armor
         * Transform the character ability
-
 
  ### CHARACTER 01 Basic
 * MPV
