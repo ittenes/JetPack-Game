@@ -6,10 +6,10 @@ it's a copy of the famous game JetPack
 * MVP 
      * Screen Start
         * Play button
-      * Screen Game
+     * Screen Game
         * Pause / Go
         * Score
-    * Screen game over
+     * Screen game over
         * Re-start Button
 * N2H
     * Lives
