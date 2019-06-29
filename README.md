@@ -2,15 +2,12 @@
 it's a copy of the famous game JetPack
 
 ## MVP (DOM - CANVAS)
-### GENERAL
-MVP definition, deliverables.	* MVP 
-
+### GENERAL	
+* MVP 
      * Screen Start
-
-         * Play button
-## Backlog	    * Screen Game
-
-         * Pause / Go
+        * Play button
+      * Screen Game
+        * Pause / Go
         * Score
     * Screen game over
         * Re-start Button
