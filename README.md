@@ -102,44 +102,45 @@ it's a copy of the famous game JetPack
 
 ## Data structure
 
-### class Game
-    ScreenSplash
-    PlayGame
-    StopGame
-    PauseGame
-    GameOver
-
-### class ScreenSplash
-    goToPlay
-        PlayGame
-    goToHowToPlay
-
-### class PlayGame
-    startBackground
-        ElementBackground
-    startCharacter
-        ElementCharacter
-    startEnemy
-        ElementEnemy
-    startRocket
-        ElementRocket
-    startElectricHurdle
-        ElementElectricHurdle
-    startLaser
-        ElementLaser 
-    startScore
-    startBigCoin
-    startCoin
-    startLive
-    startTimeLoop
-
-### class StopGame
+### class App
+    showScreenPopUp
+    playGame
     stopGame
-    playTheGame
+    pauseGame
+    showGameOver
 
-### class PauseGame
-    puseGame
-    restartGame
+### class ScreenPopUP
+    showText
+    goToPlay
+    stopThePlay
+
+### class GameJetPack
+    init
+        ElementBackground
+        ElementCharacter
+        ElementEnemy
+        ElementRocket
+        ElementElectricHurdle
+        ElementLaser 
+        ObjetCoin
+        ObjetArmor
+
+     
+    playTheGame
+    stopTheGame
+    pauseTheGame
+    finishTheGame        
+    
+    startLifeCounter
+    showTheScore
+    drowCoins
+    drowBigCoins
+    lunchRocket
+    drowElcectricHurdle
+    drowLaser
+    drowEnemy
+    
+
     
 ### class ElementBackground
     defineCeiling
@@ -169,25 +170,22 @@ it's a copy of the famous game JetPack
     
 ### class ElementElectricHurdle
     turnClockwise
-     hitTheCharacter
+    hitTheCharacter
 
-### class  ElementLaser 
-    Move
-    TurnOn
-    TurnOff
+### class ElementLaser 
+    move
+    turnOn
+    turnOff
     hitTheCharacter
     
 ### class ObjetCoin
     move
     addScore
     
-### class ObjetBigCoin
-    move
-    addScore
-    
 ### class ObjetArmor
     move
     changeElemntCharacter
+
     
 
 ## States y States Transitions
