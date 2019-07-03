@@ -15,8 +15,9 @@ class Rocket {
   alertPlayer(characterPositionY) {
 
     //Timer to lanch the rocket
-    if (this.launch == 60) {
+    if (this.launch == 120) {
       this.ctx.clearRect(this.xPosition, this.yPosition, this.width, this.height)
+      this.ctx.fillStyle = "#FF0000"
       this.launchRoquet()
       // LUNCH THE ROCKET IN THE SAME LEVEL OF THE CHARACTER
       // this.launch = 0
@@ -26,7 +27,7 @@ class Rocket {
       console.log("lo que vale el launch" + this.launch)
     }
     this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
-    this.ctx.fillStyle = "#FF0000"
+    
   }
 
   launchRoquet() {
