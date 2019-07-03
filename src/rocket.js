@@ -17,9 +17,8 @@ class Rocket {
     //Timer to lanch the rocket
     if (this.launch == 60) {
       this.ctx.clearRect(this.xPosition, this.yPosition, this.width, this.height)
-      this.launchRoquet()
-      // LUNCH THE ROCKET IN THE SAME LEVEL OF THE CHARACTER
-      // this.launch = 0
+      this.launchRoquet() // LUNCH THE ROCKET IN THE SAME LEVEL OF THE CHARACTER
+
     } else {
       this.yPosition = characterPositionY;
       this.launch++;

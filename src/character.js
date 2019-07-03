@@ -18,19 +18,22 @@ class Character {
     this.ctx.fillStyle = "#FF0000" //ROJO CORRE EN EL SUELO
     console.log("corre")
   }
+
   moveUpAndFall() {
 
     if (this.keys[38]) {
       console.log("se ha pulsado")
+      this.ctx.fillStyle = "#FFCCCC"; //BAJA ES AMARILLO
       if (this.velY > -this.speed) {
         this.velY--;
-        this.ctx.fillStyle = "#FFCCCC"; //BAJA ES AMARILLO
+
       }
     } else {
       console.log("no se ha pulsado")
+      this.ctx.fillStyle = "#FFFF00"; //SUBE GRIS
       if (this.velY < this.speed) {
         this.velY++;
-        this.ctx.fillStyle = "#FFFF00"; //SUBE GRIS
+
       }
     }
 
