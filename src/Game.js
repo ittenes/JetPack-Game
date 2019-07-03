@@ -1,22 +1,32 @@
-// class CanvasDisplay {
-//   constructor(parent, level) {
-//     this.canvas = document.createElement("canvas");
-//     this.canvas.width = Math.min(600, level.width * scale);
-//     this.canvas.height = Math.min(450, level.height * scale);
-//     parent.appendChild(this.canvas);
-//     this.cx = this.canvas.getContext("2d");
+class Game {
 
-//     this.flipPlayer = false;
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.character = new Character(100, 600, ctx);
+    this.drowBackground = new DrowBackground(600, 650, ctx);
+    this.rocket = new Rocket(ctx);
+  }
 
-//     this.viewport = {
-//       left: 0,
-//       top: 0,
-//       width: this.canvas.width / scale,
-//       height: this.canvas.height / scale
-//     };
-//   }
+  clearAll() {
+    this.ctx.clearRect(0, 0, 0, 0);
+  }
 
-//   clear() {
-//     this.canvas.remove();
-//   }
-// }
+  startGame() {
+    this.clearAll()
+    requestAnimationFrame(() => this.startGame())
+
+    this.drowBackground.createInfinteBackround();
+    this.character.moveUpAndFall();
+    this.rocket.alertPlayer(this.character.y)
+
+
+    document.body.addEventListener("keydown", e =>
+      this.character.keys[e.keyCode] = true);
+
+    document.body.addEventListener("keyup", e =>
+      this.character.keys[e.keyCode] = false);
+
+
+  }
+
+}

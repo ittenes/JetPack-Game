@@ -15,19 +15,22 @@ class Character {
     this.keys = [];
   }
   run() {
-    this.ctx.fillStyle = "#FF0000"
+    this.ctx.fillStyle = "#FF0000" //ROJO CORRE EN EL SUELO
+    console.log("corre")
   }
   moveUpAndFall() {
-    requestAnimationFrame(() => this.moveUpAndFall())
+
     if (this.keys[38]) {
       console.log("se ha pulsado")
       if (this.velY > -this.speed) {
         this.velY--;
+        this.ctx.fillStyle = "#FFCCCC"; //BAJA ES AMARILLO
       }
     } else {
       console.log("no se ha pulsado")
       if (this.velY < this.speed) {
         this.velY++;
+        this.ctx.fillStyle = "#FFFF00"; //SUBE GRIS
       }
     }
 
@@ -36,19 +39,11 @@ class Character {
 
     if (this.y > (this.ground - this.heightObjet)) {
       this.y = (this.ground - this.heightObjet);
-      this.ctx.fillStyle = "#FFFFFF";
+      this.run();
     } else if (this.y <= this.ceiling) {
       this.y = this.ceiling;
-      this.run();
     }
 
     this.ctx.fillRect(this.x, this.y, this.widthObjet, this.heightObjet);
   }
-
-
-  // ESTO ES COMO MOVERLO LLEVAR EL GAME
-  // document.body.addEventListener("keydown", function (e) {
-  //   keys[e.keyCode] = true;
-  //   console.log("TCL: e.keyCode", e.keyCode)
-  // });
 }
