@@ -1,5 +1,5 @@
 class Rocket {
-  constructor(ctx) {
+  constructor() {
     this.speedRocket = 20;
     this.xPosition = 1150;
     this.yPosition = 0;
@@ -7,35 +7,28 @@ class Rocket {
     this.height = 40;
     this.launch = 0;
     this.launcher = false;
-    this.ctx = ctx;
   }
 
-  draw() {
-
-  }
-
-  alertPlayer(characterPositionY, ) {
+  alertPlayer(characterPositionY, ctx) {
     //Timer to lanch the rocket
-    if (this.launch == 120) {
-      this.launchRoquet() // LUNCH THE ROCKET IN THE SAME LEVEL OF THE CHARACTER
+    if (this.launch == 60) {
+      this.launchRoquet(ctx) // LUNCH THE ROCKET IN THE SAME LEVEL OF THE CHARACTER
     } else {
       this.yPosition = characterPositionY;
       this.launch++;
     }
-    this.ctx.fillStyle = "#FF0000";
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
-
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
   }
 
-  launchRoquet() {
+  launchRoquet(ctx) {
 
     if (this.xPosition <= -60) {
       this.xPositon = -60
     } else {
       this.xPosition -= this.speedRocket;
     }
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
-
+    ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
   }
 
 

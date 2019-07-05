@@ -1,9 +1,8 @@
 class Character {
 
-  constructor(ceiling, ground, ctx) {
+  constructor(ceiling, ground) {
     this.ceiling = ceiling;
     this.ground = ground;
-    this.ctx = ctx;
     this.x = 150;
     this.y = 220;
     this.widthObjet = 20;
@@ -14,20 +13,20 @@ class Character {
     this.friction = 0.92;
     this.keys = [];
   }
-  run() {
-    this.ctx.fillStyle = "#FF0000" //ROJO CORRE EN EL SUELO
+  run(ctx) {
+    ctx.fillStyle = "#FF0000" //ROJO CORRE EN EL SUELO
   }
 
-  moveUpAndFall() {
+  moveUpAndFall(ctx) {
 
     if (this.keys[38]) {
-      this.ctx.fillStyle = "#FFCCCC"; //BAJA ES AMARILLO
+      ctx.fillStyle = "#FFCCCC"; //BAJA ES AMARILLO
       if (this.velY > -this.speed) {
         this.velY--;
 
       }
     } else {
-      this.ctx.fillStyle = "#FFFF00"; //SUBE GRIS
+      ctx.fillStyle = "#FFFF00"; //SUBE ROSA
       if (this.velY < this.speed) {
         this.velY++;
 
@@ -39,11 +38,11 @@ class Character {
 
     if (this.y > (this.ground - this.heightObjet)) {
       this.y = (this.ground - this.heightObjet);
-      this.run();
+      this.run(ctx);
     } else if (this.y <= this.ceiling) {
       this.y = this.ceiling;
     }
 
-    this.ctx.fillRect(this.x, this.y, this.widthObjet, this.heightObjet);
+    ctx.fillRect(this.x, this.y, this.widthObjet, this.heightObjet);
   }
 }
