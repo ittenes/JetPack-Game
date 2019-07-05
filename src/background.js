@@ -1,29 +1,24 @@
 class DrowBackground {
   constructor(width, height) {
     this.speedBg = 2;
-    this.width = width;
-    this.height = height;
+    this.w = width;
+    this.h = height;
     this.imge = new Image();
-    this.imgWidth = 0;
+    this.x = 0;
   }
-
 
   createInfinteBackround(ctx) {
 
     this.imge.src = 'images/star-night-backgrounds-5524119.jpg';
 
-    ctx.drawImage(this.imge, this.imgWidth, 0);
-    ctx.drawImage(this.imge, this.imgWidth + this.width, 0);
+    ctx.drawImage(this.imge, this.x, 0);
+    ctx.drawImage(this.imge, this.x + this.w, 0);
+    ctx.drawImage(this.imge, this.x + (this.w * 2), 0);
 
-    this.imgWidth -= this.speedBg;
+    this.x -= this.speedBg;
 
-
-    if (this.imgWidth == -this.width) {
-      this.imgWidth = 0;
+    if (this.x == -this.w) {
+      this.x = 0;
     }
-
   }
-
-
-
 }

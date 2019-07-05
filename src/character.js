@@ -20,13 +20,13 @@ class Character {
   moveUpAndFall(ctx) {
 
     if (this.keys[38]) {
-      ctx.fillStyle = "#FFCCCC"; //BAJA ES AMARILLO
+      ctx.fillStyle = "#FFCCCC"; // SUBE ROSA
       if (this.velY > -this.speed) {
         this.velY--;
 
       }
     } else {
-      ctx.fillStyle = "#FFFF00"; //SUBE ROSA
+      ctx.fillStyle = "#FFFF00"; // BAJA ES AMARILLO
       if (this.velY < this.speed) {
         this.velY++;
 

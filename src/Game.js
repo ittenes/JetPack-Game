@@ -4,7 +4,9 @@ class Game {
     this.ctx = ctx;
     this.collision = new Collisions()
     this.character = new Character(100, 600, );
-    this.drowBackground = new DrowBackground(600, 650);
+    this.drowBackground = new DrowBackground(800, 600);
+    this.drowElectric = new DrowElectric();
+    this.swithcRocketOnOff = 0; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
     this.increaseRockets = 1.3;
@@ -41,7 +43,7 @@ class Game {
 
     if (this.statusNow === "running") {
 
-      //ROQUET RELOAD
+      //ROCKET RELOAD
       if (this.count % 900 == 0 && this.count !== 0) {
         this.rockets = []
         this.numRocket = Math.round(this.numRocket * this.increaseRockets)
@@ -55,17 +57,15 @@ class Game {
         }
       }
 
-
       //ROCKET ACTIVATION -   
       if (this.rockets.length !== 0) {
         this.rockets.forEach((e, i) => {
           if (e.timer == this.count) {
-            this.rockets[i].statusRocket = 1;
+            this.rockets[i].statusRocket = this.swithcRocketOnOff;
           }
         });
       }
-      console.log(this.count)
-      console.log(this.rockets)
+
       this.updateGame();
     }
   }
@@ -87,7 +87,7 @@ class Game {
         if (e.statusRocket) {
           e.lunchRocket.alertPlayer(this.character.y, this.ctx)
 
-          colision with character
+          //colision with character
           let rocket = {
             x: e.lunchRocket.xPosition,
             y: e.lunchRocket.yPosition,
@@ -104,13 +104,13 @@ class Game {
 
 
           if (e.lunchRocket.xPosition < -10) {
-            console.log(e.id, e.lunchRocket.xPosition)
             this.rockets.splice(e.id, 1);
           }
         }
       })
     }
 
+    this.drowElectric.createElectric(400, 600, -4, this.ctx);
     this.count++;
 
     requestAnimationFrame(() => this.statusGame());
