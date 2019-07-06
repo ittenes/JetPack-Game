@@ -1,17 +1,19 @@
 class Game {
 
-  constructor(ctx) {
+  constructor(ctx, electrical) {
     this.ctx = ctx;
     this.collision = new Collisions()
-    this.character = new Character(100, 600, );
+    this.character = new Character(75, 600, );
     this.drowBackground = new DrowBackground(800, 600);
-    this.drowElectric = new DrowElectric();
-    this.swithcRocketOnOff = 0; // on off rockets
+    //this.drowElectric = new DrowElectric(75, 60, 300, 0, 2);
+    this.drowElectric = [];
+    this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
     this.increaseRockets = 1.3;
     this.statusNow;
-    //this.electric = new DrowElectric(100, 300, 200, ctx)
+    this.electrical = electrical;
+    this.electric;
     this.count = 0;
   }
 
@@ -32,8 +34,6 @@ class Game {
     }
 
     this.statusNow = "running"
-
-    //this.electric.createElectric()
     this.statusGame();
 
 
@@ -65,6 +65,7 @@ class Game {
           }
         });
       }
+
 
       this.updateGame();
     }
@@ -109,8 +110,42 @@ class Game {
         }
       })
     }
+    //ELECTRIC && COLISION
+    let threeFirstElectrical = [this.electrical[0], this.electrical[2], this.electrical[2]];
+    if (threeFirstElectrical.length !== 0) {
+      console.log(this.count)
+      threeFirstElectrical.forEach(e => {
+        if (e.timer === this.count) {
+          this.drowElectric.push(new DrowElectric(e.classElectric[0], e.classElectric[1], e.classElectric[2], e.classElectric[3], e.classElectric[4]))
+        }
+      });
+    }
+    //ctreate elctrica y collision 
+    this.drowElectric.forEach(element => {
+      element.createElectric(this.ctx)
+      //colision with character
+      let plataform = {
+        x: element.x,
+        y: element.y,
+        w: element.w,
+        h: element.h
+      }
+      let character = {
+        x: this.character.x,
+        y: this.character.y,
+        w: this.character.widthObjet,
+        h: this.character.heightObjet
+      }
+      this.collision.detectCollisionRocket(plataform, character, this.ctx);
+      let numberOfElectricForColision = 2
+      if (element.x < -element.w) {
+        this.drowElectric.shift();
+        //threeFirstElectrical.push(this.electrical[numberOfElectricForColision + 1])
+        //numberOfElectricForColision++;
+      }
+    });
+    //this.drowElectric && this.drowElectric.createElectric(this.ctx);
 
-    this.drowElectric.createElectric(400, 600, -4, this.ctx);
     this.count++;
 
     requestAnimationFrame(() => this.statusGame());

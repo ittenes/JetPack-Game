@@ -5,7 +5,7 @@ window.onload = function () {
   var widthCanvasGlobal = canvas.width = 1224;
   var heigthCanvasGlobal = canvas.height = 650;
 
-  let game = new Game(ctx)
+  let game = new Game(ctx, electrical)
   game.startGame();
 
 }
