@@ -1,4 +1,4 @@
-class DrowElectric {
+class DrawElectric {
   constructor(yPosition, height, width, rotation, speed) {
     this.speedBg = speed;
     this.y = yPosition;
@@ -26,7 +26,6 @@ class DrowElectric {
       ctx.translate(-(this.x + this.w / 2), -(this.y + this.h / 2));
       ctx.fillStyle = "#FFeedd";
       ctx.fillRect(this.x, this.y, this.w, this.h);
-      console.log("TCL: DrowElectric -> createElectric -> this.x", this.x)
       ctx.restore();
       this.x -= this.speedBg;
       //this.y -= (this.speedBg/2);
