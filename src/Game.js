@@ -4,16 +4,15 @@ class Game {
     this.ctx = ctx;
     this.collision = new Collisions()
     this.character = new Character(75, 600, );
-    this.drowBackground = new DrowBackground(800, 600);
-    //this.drowElectric = new DrowElectric(75, 60, 300, 0, 2);
+    this.drowBackground = new DrowBackground(1300, 650);
     this.drowElectric = [];
-    this.swithcRocketOnOff = 1; // on off rockets
+    this.swithcRocketOnOff = 0; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
     this.increaseRockets = 1.3;
     this.statusNow;
     this.electrical = electrical;
-    this.electric;
+    this.electricWalls = [];
     this.count = 0;
   }
 
@@ -103,7 +102,6 @@ class Game {
           }
           this.collision.detectCollisionRocket(rocket, character, this.ctx);
 
-
           if (e.lunchRocket.xPosition < -10) {
             this.rockets.splice(e.id, 1);
           }
@@ -111,10 +109,11 @@ class Game {
       })
     }
     //ELECTRIC && COLISION
-    let threeFirstElectrical = [this.electrical[0], this.electrical[2], this.electrical[2]];
-    if (threeFirstElectrical.length !== 0) {
+    this.electricWalls = electrical;
+    console.log("TCL: Game -> updateGame -> threeFirstElectrical", this.electricWalls)
+    if (this.electricWalls.length !== 0) {
       console.log(this.count)
-      threeFirstElectrical.forEach(e => {
+      this.electricWalls.forEach(e => {
         if (e.timer === this.count) {
           this.drowElectric.push(new DrowElectric(e.classElectric[0], e.classElectric[1], e.classElectric[2], e.classElectric[3], e.classElectric[4]))
         }
@@ -124,6 +123,8 @@ class Game {
     this.drowElectric.forEach(element => {
       element.createElectric(this.ctx)
       //colision with character
+      console.log("TCL: Game -> updateGame -> element.x", element.x)
+
       let plataform = {
         x: element.x,
         y: element.y,
@@ -137,19 +138,15 @@ class Game {
         h: this.character.heightObjet
       }
       this.collision.detectCollisionRocket(plataform, character, this.ctx);
-      let numberOfElectricForColision = 2
+
       if (element.x < -element.w) {
         this.drowElectric.shift();
-        //threeFirstElectrical.push(this.electrical[numberOfElectricForColision + 1])
-        //numberOfElectricForColision++;
       }
     });
-    //this.drowElectric && this.drowElectric.createElectric(this.ctx);
 
     this.count++;
 
     requestAnimationFrame(() => this.statusGame());
-
   }
 
   controlKeys() {
@@ -159,6 +156,13 @@ class Game {
 
     document.body.addEventListener("keyup", e =>
       this.character.keys[e.keyCode] = false);
+
+    document.body.addEventListener("keyup", e => {
+      console.log("TCL: Game -> controlKeys -> e.keyCode", e.keyCode)
+      if (e.keyCode == 32) {
+        cancelAnimationFrame(() => this.updateGame()); // Stop the animation;
+      }
+    });
   }
 
 

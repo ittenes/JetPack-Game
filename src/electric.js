@@ -11,24 +11,26 @@ class DrowElectric {
 
 
   createElectric(ctx) {
-    if (this.x + this.w >= 0 && this.rotation == 0) {
-      //ctx.save();
-      ctx.fillStyle = "#FFeedd";
-      ctx.fillRect(this.x, this.y, this.w, this.h);
-      this.x -= this.speedBg;
-      //ctx.restore();
-      console.log('lo pinto' + ctx)
-    } else if (this.x + this.w >= 0 && this.rotation == -6) {
+    if (this.rotation == 0) {
       ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(Math.PI / this.rotation);
-      ctx.translate(-this.x, -this.y);
       ctx.fillStyle = "#FFeedd";
       ctx.fillRect(this.x, this.y, this.w, this.h);
-
       this.x -= this.speedBg;
-      this.y -= (this.speedBg / 1.5);
       ctx.restore();
+
+    } else if (this.rotation == 6) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.translate(this.x + this.w / 2, this.y + this.h / 2);
+      ctx.rotate(Math.PI / this.rotation);
+      ctx.translate(-(this.x + this.w / 2), -(this.y + this.h / 2));
+      ctx.fillStyle = "#FFeedd";
+      ctx.fillRect(this.x, this.y, this.w, this.h);
+      console.log("TCL: DrowElectric -> createElectric -> this.x", this.x)
+      ctx.restore();
+      this.x -= this.speedBg;
+      //this.y -= (this.speedBg/2);
+
     }
   }
 
