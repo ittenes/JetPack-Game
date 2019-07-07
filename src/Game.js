@@ -5,7 +5,7 @@ class Game {
     this.collision = new Collisions()
     this.character = new Character(75, 600, );
     this.drawBackground = new DrawBackground(1300, 650);
-    this.swithcRocketOnOff = 0; // on off rockets
+    this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
     this.increaseRockets = 1.3;
@@ -15,6 +15,7 @@ class Game {
     this.cointsPositions = coinsPositionsAll;
     this.coinsAll = [];
     this.coinsPoints = 0;
+    this.keys = []
     this.statusNow;
     this.count = 0;
   }
@@ -49,6 +50,9 @@ class Game {
       if (this.count % 900 == 0 && this.count !== 0) {
         this.rockets = []
         this.numRocket = Math.round(this.numRocket * this.increaseRockets)
+        if (this.numRocket > 20) {
+          this.numRocket = 20
+        }
         for (let i = 0; i < this.numRocket; i++) {
           this.rockets.push({
             id: this.rockets.length,
@@ -67,8 +71,6 @@ class Game {
           }
         });
       }
-
-
       this.updateGame();
     }
   }
@@ -116,7 +118,6 @@ class Game {
     //ELECTRIC && COLISION
     this.electricWalls = electrical;
     if (this.electricWalls.length !== 0) {
-      console.log(this.count)
       this.electricWalls.forEach(e => {
         if (e.timer === this.count) {
           this.drawElectric.push(new DrawElectric(e.classElectric[0], e.classElectric[1], e.classElectric[2], e.classElectric[3], e.classElectric[4]))
@@ -189,9 +190,10 @@ class Game {
 
     this.count++;
 
-    requestAnimationFrame(() => this.statusGame());
-  }
 
+    requestAnimationFrame(() => this.statusGame());
+
+  }
   controlKeys() {
     // YOU MANGE DE KEY EVENT ---------------------------
     document.body.addEventListener("keydown", e =>
@@ -200,11 +202,11 @@ class Game {
     document.body.addEventListener("keyup", e =>
       this.character.keys[e.keyCode] = false);
 
-    document.body.addEventListener("keyup", e => {
-      if (e.keyCode == 32) {
-        cancelAnimationFrame(() => this.updateGame()); // Stop the animation;
-      }
-    });
+    document.body.addEventListener("keydown", e => {
+
+      // this.keys[e.keyCode] = true
+      // console.log("he pulsado" + e.keyCode)
+    })
   }
 
 

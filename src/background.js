@@ -49,8 +49,8 @@ class DrawBackground {
     this.imge02 = new Image();
     ctx.save();
     this.imge02.src = 'images/Backgrounds/03/Layer03.png';
-    ctx.drawImage(this.imge02, this.x01, 0, this.w, this.h);
-    ctx.drawImage(this.imge02, this.x01 + this.w, 0, this.w, this.h);
+    ctx.drawImage(this.imge02, this.x02, 0, this.w, this.h);
+    ctx.drawImage(this.imge02, this.x02 + this.w, 0, this.w, this.h);
 
     this.x02 -= this.speedBg / 2;
     ctx.restore();
