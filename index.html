@@ -5,11 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Staatliches&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <canvas id="canvas"></canvas>
+    <div class="header-score">
+      <div class="logo">
+        <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
+      </div>
+      <div class="lives">
+        <h3>LIVES</h3>
+        <ul>
+          <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+          <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+          <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+          <li>
+            <img
+              class="live-out"
+              src="images/Items_Sprite/Heals/1.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img
+              class="live-out"
+              src="images/Items_Sprite/Heals/1.png"
+              alt=""
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="score">
+        <h3>SCORE</h3>
+        <div class="text-score" id="tex-score">000</div>
+      </div>
+      <div class="time">
+        <h3>TIME</h3>
+        <div class="text-time" id="text-time"></div>
+      </div>
+    </div>
+    <div>
+      <canvas id="canvas"></canvas>
+    </div>
     <script src="src/data.js"></script>
+    <script src="src/timer.js"></script>
     <script src="src/coinsPositionsAll.js"></script>
     <script src="src/coins.js"></script>
     <script src="src/rocket.js"></script>
