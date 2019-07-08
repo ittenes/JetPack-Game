@@ -27,7 +27,6 @@ class Game {
 
   startGame() {
 
-
     for (let i = 0; i < this.numRocket; i++) {
       this.rockets.push({
         id: this.rockets.length,
