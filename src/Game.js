@@ -5,6 +5,7 @@ class Game {
     this.collision = new Collisions()
     this.character = new Character(75, 600, );
     this.drawBackground = new DrawBackground(1300, 650);
+    this.timerGame = new Timer();
     this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
@@ -38,6 +39,8 @@ class Game {
 
     this.statusNow = "running"
     this.statusGame();
+    this.timerGame.startChr()
+
 
 
   }
@@ -145,13 +148,12 @@ class Game {
 
       if (element.x < -element.w) {
         this.drawElectric.shift();
+
       }
     });
 
 
     //COINS && GET THE COINS
-
-
     if (this.cointsPositions.length !== 0) {
       this.cointsPositions.forEach(e => {
         if (e.timer === this.count) {
@@ -181,6 +183,13 @@ class Game {
       if (this.collision.detectCollisionRocket(coin, character, this.ctx)) {
         this.coinsAll.splice(index, 1);
         this.coinsPoints++
+        if (this.coinsPoints < 10) {
+          document.getElementById("tex-score").innerHTML = `00${this.coinsPoints}`;
+        } else if (this.coinsPoints >= 10 && this.coinsPoints < 100) {
+          document.getElementById("tex-score").innerHTML = `0${this.coinsPoints}`;
+        } else {
+          document.getElementById("tex-score").innerHTML = `${this.coinsPoints}`;
+        }
       };
 
       if (element.x < -element.w) {
