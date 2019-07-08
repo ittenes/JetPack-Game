@@ -15,9 +15,10 @@ class Collisions {
       this.rocket.y < this.character.y + this.character.h &&
       this.rocket.y + this.rocket.h > this.character.y) {
       //this.drow(ctx) // collision detected!
-      alert("the rocket hit me!!!")
-
+      //alert("the rocket hit me!!!")
+      return true;
     }
+
   }
   drow(ctx) {
     ctx.fillRect(600, 100, 400, 400);

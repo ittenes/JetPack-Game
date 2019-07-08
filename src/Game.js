@@ -4,16 +4,19 @@ class Game {
     this.ctx = ctx;
     this.collision = new Collisions()
     this.character = new Character(75, 600, );
-    this.drowBackground = new DrowBackground(800, 600);
-    //this.drowElectric = new DrowElectric(75, 60, 300, 0, 2);
-    this.drowElectric = [];
+    this.drawBackground = new DrawBackground(1300, 650);
     this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
     this.increaseRockets = 1.3;
-    this.statusNow;
+    this.drawElectric = [];
     this.electrical = electrical;
-    this.electric;
+    this.electricWalls = [];
+    this.cointsPositions = coinsPositionsAll;
+    this.coinsAll = [];
+    this.coinsPoints = 0;
+    this.keys = []
+    this.statusNow;
     this.count = 0;
   }
 
@@ -47,6 +50,9 @@ class Game {
       if (this.count % 900 == 0 && this.count !== 0) {
         this.rockets = []
         this.numRocket = Math.round(this.numRocket * this.increaseRockets)
+        if (this.numRocket > 20) {
+          this.numRocket = 20
+        }
         for (let i = 0; i < this.numRocket; i++) {
           this.rockets.push({
             id: this.rockets.length,
@@ -65,8 +71,6 @@ class Game {
           }
         });
       }
-
-
       this.updateGame();
     }
   }
@@ -77,7 +81,7 @@ class Game {
 
     this.controlKeys();
 
-    this.drowBackground.createInfinteBackround(this.ctx);
+    this.drawBackground.createInfinteBackround(this.ctx);
 
     // CHARACTER ------------
     this.character.moveUpAndFall(this.ctx);
@@ -103,27 +107,28 @@ class Game {
           }
           this.collision.detectCollisionRocket(rocket, character, this.ctx);
 
-
           if (e.lunchRocket.xPosition < -10) {
             this.rockets.splice(e.id, 1);
           }
         }
       })
     }
+
+
     //ELECTRIC && COLISION
-    let threeFirstElectrical = [this.electrical[0], this.electrical[2], this.electrical[2]];
-    if (threeFirstElectrical.length !== 0) {
-      console.log(this.count)
-      threeFirstElectrical.forEach(e => {
+    this.electricWalls = electrical;
+    if (this.electricWalls.length !== 0) {
+      this.electricWalls.forEach(e => {
         if (e.timer === this.count) {
-          this.drowElectric.push(new DrowElectric(e.classElectric[0], e.classElectric[1], e.classElectric[2], e.classElectric[3], e.classElectric[4]))
+          this.drawElectric.push(new DrawElectric(e.classElectric[0], e.classElectric[1], e.classElectric[2], e.classElectric[3], e.classElectric[4]))
         }
       });
     }
-    //ctreate elctrica y collision 
-    this.drowElectric.forEach(element => {
+    //ctreate get the coin
+    this.drawElectric.forEach(element => {
       element.createElectric(this.ctx)
-      //colision with character
+      //ctreate elctrica y collision 
+
       let plataform = {
         x: element.x,
         y: element.y,
@@ -137,21 +142,58 @@ class Game {
         h: this.character.heightObjet
       }
       this.collision.detectCollisionRocket(plataform, character, this.ctx);
-      let numberOfElectricForColision = 2
+
       if (element.x < -element.w) {
-        this.drowElectric.shift();
-        //threeFirstElectrical.push(this.electrical[numberOfElectricForColision + 1])
-        //numberOfElectricForColision++;
+        this.drawElectric.shift();
       }
     });
-    //this.drowElectric && this.drowElectric.createElectric(this.ctx);
+
+
+    //COINS && GET THE COINS
+
+
+    if (this.cointsPositions.length !== 0) {
+      this.cointsPositions.forEach(e => {
+        if (e.timer === this.count) {
+          this.coinsAll.push(new DrawCoins(e.coin[0], e.coin[1], e.coin[2], e.coin[3]));
+        }
+      });
+    }
+
+    //ctreate get the coin
+    this.coinsAll.forEach((element, index) => {
+      element.createCoins(this.ctx)
+
+
+      // colision with character
+      let coin = {
+        x: element.x,
+        y: element.y,
+        w: element.w,
+        h: element.h
+      }
+      let character = {
+        x: this.character.x,
+        y: this.character.y,
+        w: this.character.widthObjet,
+        h: this.character.heightObjet
+      }
+      if (this.collision.detectCollisionRocket(coin, character, this.ctx)) {
+        this.coinsAll.splice(index, 1);
+        this.coinsPoints++
+      };
+
+      if (element.x < -element.w) {
+        this.coinsAll.shift();
+      }
+    });
 
     this.count++;
+
 
     requestAnimationFrame(() => this.statusGame());
 
   }
-
   controlKeys() {
     // YOU MANGE DE KEY EVENT ---------------------------
     document.body.addEventListener("keydown", e =>
@@ -159,6 +201,12 @@ class Game {
 
     document.body.addEventListener("keyup", e =>
       this.character.keys[e.keyCode] = false);
+
+    document.body.addEventListener("keydown", e => {
+
+      // this.keys[e.keyCode] = true
+      // console.log("he pulsado" + e.keyCode)
+    })
   }
 
 
