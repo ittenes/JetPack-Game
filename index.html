@@ -15,43 +15,51 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <div class="header-score">
-      <div class="logo">
+    <div id="splash" class="splash">
+      <div class="img-splash">
         <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
       </div>
-      <div class="lives">
-        <h3>LIVES</h3>
-        <ul>
-          <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
-          <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
-          <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
-          <li>
-            <img
-              class="live-out"
-              src="images/Items_Sprite/Heals/1.png"
-              alt=""
-            />
-          </li>
-          <li>
-            <img
-              class="live-out"
-              src="images/Items_Sprite/Heals/1.png"
-              alt=""
-            />
-          </li>
-        </ul>
-      </div>
-      <div class="score">
-        <h3>SCORE</h3>
-        <div class="text-score" id="tex-score">000</div>
-      </div>
-      <div class="time">
-        <h3>TIME</h3>
-        <div class="text-time" id="text-time"></div>
-      </div>
+      <button id="start" class="btn-start">START</button>
     </div>
-    <div>
-      <canvas id="canvas"></canvas>
+    <div id="game" class="game">
+      <div class="header-score">
+        <div class="logo">
+          <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
+        </div>
+        <div class="lives">
+          <h3>LIVES</h3>
+          <ul>
+            <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+            <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+            <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+            <li>
+              <img
+                class="live-out"
+                src="images/Items_Sprite/Heals/1.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                class="live-out"
+                src="images/Items_Sprite/Heals/1.png"
+                alt=""
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="score">
+          <h3>SCORE</h3>
+          <div class="text-score" id="tex-score">000</div>
+        </div>
+        <div class="time">
+          <h3>TIME</h3>
+          <div class="text-time" id="text-time"></div>
+        </div>
+      </div>
+      <div>
+        <canvas id="canvas"></canvas>
+      </div>
     </div>
     <script src="src/data.js"></script>
     <script src="src/timer.js"></script>

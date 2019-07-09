@@ -1,11 +1,17 @@
-window.onload = function () {
-  let canvas = document.getElementById("canvas");
-  let ctx = canvas.getContext("2d");
+window.onload = function() {
+  let gameVisible = document.getElementById("game");
+  let splashVisible = document.getElementById("splash");
+  let btnStart = document.getElementById("start");
 
-  var widthCanvasGlobal = canvas.width = 1224;
-  var heigthCanvasGlobal = canvas.height = 650;
+  btnStart.addEventListener("click", function() {
+    gameVisible.style.display = "block";
+    splashVisible.style.display = "none";
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
 
-  let game = new Game(ctx, electrical)
-  game.startGame();
-
-}
+    var widthCanvasGlobal = (canvas.width = 1224);
+    var heigthCanvasGlobal = (canvas.height = 650);
+    let game = new Game(ctx, electrical);
+    game.startGame();
+  });
+};
