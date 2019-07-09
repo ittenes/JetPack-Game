@@ -46,24 +46,25 @@ button {
   text-align: center;
   background: #15334a;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 20px;
   margin: 50px 5%;
-  border-radius: 4px;
+  border: 8px solid rgb(243, 255, 5);
   width: 300px;
 }
 
 .visible {
   display: block;
 }
+
 .game {
   display: none;
 }
-.img-splash {
-}
+
 .img-splash img {
   width: 600px;
   margin-top: 200px;
 }
+
 .header-score {
   display: flex;
   flex-direction: row;
@@ -73,6 +74,7 @@ button {
   background: url(../images/User_Interface/PopupBox.png) no-repeat center;
   background-size: 1310px;
 }
+
 .logo {
   width: 300px;
   padding-top: 20px;

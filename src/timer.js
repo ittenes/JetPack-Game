@@ -21,21 +21,20 @@ class Timer {
       this.mints += 1;
     }
     document.getElementById('text-time').innerHTML = `${this.mints} : ${this.seconds}`;
-
-
   }
-
 
   startChr() {
     this.startchron = 1;
     this.chronometer();
     setInterval(() => {
       this.chronometer();
-    }, 100);
+    }, 1000);
   }
+
   pauseChr() {
     this.startchron = 0;
   }
+
   resetChr() {
     this.zecsec = 0;
     this.seconds = 0;

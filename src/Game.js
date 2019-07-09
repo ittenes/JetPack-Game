@@ -1,3 +1,6 @@
+const STATUS = {
+  RUNNING: "running"
+}
 class Game {
 
   constructor(ctx, electrical) {
@@ -19,6 +22,7 @@ class Game {
     this.keys = []
     this.statusNow;
     this.count = 0;
+    this.intervalId;
   }
 
   clearAll() {
@@ -26,7 +30,6 @@ class Game {
   }
 
   startGame() {
-
     for (let i = 0; i < this.numRocket; i++) {
       this.rockets.push({
         id: this.rockets.length,
@@ -39,15 +42,13 @@ class Game {
     this.statusNow = "running"
     this.statusGame();
     this.timerGame.startChr()
-
-
-
+    this.controlKeys();
   }
 
   statusGame() {
 
-    if (this.statusNow === "running") {
 
+    if (this.statusNow === "running") {
       //ROCKET RELOAD
       if (this.count % 900 == 0 && this.count !== 0) {
         this.rockets = []
@@ -64,7 +65,6 @@ class Game {
           })
         }
       }
-
       //ROCKET ACTIVATION -   
       if (this.rockets.length !== 0) {
         this.rockets.forEach((e, i) => {
@@ -74,18 +74,18 @@ class Game {
         });
       }
       this.updateGame();
+    } else if (this.statusNow === "pause") {
+      this.timerGame.pauseChr();
     }
   }
 
   updateGame() {
 
     this.clearAll();
-
-    this.controlKeys();
-
+    //DRAW THE BACKGROUND
     this.drawBackground.createInfinteBackround(this.ctx);
 
-    // CHARACTER ------------
+    // DRAW THE CHARACTER ------------
     this.character.moveUpAndFall(this.ctx);
 
     //ROKETS && COLLISINN WITH CHARACTER - -- -- -- -
@@ -116,7 +116,6 @@ class Game {
       })
     }
 
-
     //ELECTRIC && COLISION
     this.electricWalls = electrical;
     if (this.electricWalls.length !== 0) {
@@ -130,7 +129,6 @@ class Game {
     this.drawElectric.forEach(element => {
       element.createElectric(this.ctx)
       //ctreate elctrica y collision 
-
       let plataform = {
         x: element.x,
         y: element.y,
@@ -151,7 +149,6 @@ class Game {
       }
     });
 
-
     //COINS && GET THE COINS
     if (this.cointsPositions.length !== 0) {
       this.cointsPositions.forEach(e => {
@@ -160,12 +157,9 @@ class Game {
         }
       });
     }
-
     //ctreate get the coin
     this.coinsAll.forEach((element, index) => {
       element.createCoins(this.ctx)
-
-
       // colision with character
       let coin = {
         x: element.x,
@@ -190,7 +184,6 @@ class Game {
           document.getElementById("tex-score").innerHTML = `${this.coinsPoints}`;
         }
       };
-
       if (element.x < -element.w) {
         this.coinsAll.shift();
       }
@@ -198,10 +191,20 @@ class Game {
 
     this.count++;
 
-
-    requestAnimationFrame(() => this.statusGame());
+    this.intervalId = requestAnimationFrame(this.statusGame.bind(this));
 
   }
+  pauseGame() {
+    if (this.statusNow === "running") {
+      this.statusNow = "pause"
+    } else {
+      this.statusNow = "running";
+      this.statusGame();
+      this.timerGame.startChr();
+
+    }
+  }
+
   controlKeys() {
     // YOU MANGE DE KEY EVENT ---------------------------
     document.body.addEventListener("keydown", e =>
@@ -211,9 +214,10 @@ class Game {
       this.character.keys[e.keyCode] = false);
 
     document.body.addEventListener("keydown", e => {
+      if (e.keyCode === 32) {
+        this.pauseGame();
+      }
 
-      // this.keys[e.keyCode] = true
-      // console.log("he pulsado" + e.keyCode)
     })
   }
 
