@@ -12,6 +12,9 @@ class Character {
     this.friction = 0.92;
     this.keys = [];
     this.imges = []
+    this.countImg = 0;
+    this.imgNumberSmoke = 1;
+    this.imgNumberBg = 1;
   }
 
   // run(ctx) {
@@ -39,30 +42,24 @@ class Character {
       'images/Characters/02/Fly/3.png',
       'images/Characters/02/Fly/4.png'
     ]
-
-    this.images.forEach(element => {
-      this.image.src = element;
-      ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);
-
-    });
-
-
+    this.image.src = 'images/Characters/02/Fly/1.png';
+    ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);
   }
+
   flyDown(ctx, bg) {
+    this.imageBg = new Image();
     if (bg == 0) {
-      this.image = new Image();
       this.images = [
+        'images/Characters/02/Fly/1.png',
+        'images/Characters/02/Fly/2.png',
+        'images/Characters/02/Fly/3.png',
+        'images/Characters/02/Fly/4.png',
         'images/Characters/02/Fly/1.png',
         'images/Characters/02/Fly/2.png',
         'images/Characters/02/Fly/3.png',
         'images/Characters/02/Fly/4.png'
       ]
-      this.images.forEach(element => {
-        this.image.src = element;
-        ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);
-      }); //RO
     } else {
-      this.imageBg = new Image();
       this.images = [
         'images/Characters/02/Walk/1.png',
         'images/Characters/02/Walk/2.png',
@@ -73,11 +70,17 @@ class Character {
         'images/Characters/02/Walk/7.png',
         'images/Characters/02/Walk/8.png'
       ]
-      this.images.forEach(element => {
-        this.imageBg.src = element;
-        ctx.drawImage(this.imageBg, this.x - 25, this.y - 25, 100, 100);
-      });
     }
+    if (this.countImg == 4) {
+      this.imgNumberBg++
+      this.countImg = 0;
+      if (this.imgNumberBg > 7) {
+        this.imgNumberBg = 0
+      }
+    }
+    this.countImg++;
+    this.imageBg.src = this.images[this.imgNumberBg];
+    ctx.drawImage(this.imageBg, this.x - 25, this.y - 25, 100, 100);
   }
 
   smokes(ctx) {
@@ -92,10 +95,19 @@ class Character {
       'images/Characters/Jetpack Smoke/3.png',
       'images/Characters/Jetpack Smoke/4.png'
     ]
-    this.imagesSmoke.forEach(e => {
-      this.imgSmoke.src = e;
-      ctx.drawImage(this.imgSmoke, this.x - 60, this.y + 60, 100, 100);
-    });
+    //this.imgSmoke.src = 'images/Characters/Jetpack Smoke/1.png';
+    // ctx.drawImage(this.imgSmoke, this.x - 60, this.y + 60, 100, 100);
+
+    if (this.countImg == 4) {
+      this.imgNumberSmoke++
+      this.countImg = 0;
+      if (this.imgNumberSmoke > 3) {
+        this.imgNumberSmoke = 0
+      }
+    }
+    this.countImg++;
+    this.imgSmoke.src = this.imagesSmoke[this.imgNumberSmoke];
+    ctx.drawImage(this.imgSmoke, this.x - 60, this.y + 60, 100, 100);
   }
 
   crash(ctx) {

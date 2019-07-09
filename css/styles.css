@@ -1,10 +1,11 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  background-color: #2f3435f7;
-  color: #000000;
+
   text-align: center;
-  background: url(../images/User_Interface/bg01.png) no-repeat center;
+  background: url(../images/User_Interface/bg01.png) no-repeat;
+  background-position-y: -150px;
+  background-color: #1a5461f7;
 }
 
 h1,
@@ -38,6 +39,32 @@ h4 {
   font-size: 1.8rem;
 }
 
+button {
+  font-family: "Bowlby One SC", cursive;
+  font-size: 3rem;
+  color: rgb(243, 255, 5);
+  text-align: center;
+  background: #15334a;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 50px 5%;
+  border: 8px solid rgb(243, 255, 5);
+  width: 300px;
+}
+
+.visible {
+  display: block;
+}
+
+.game {
+  display: none;
+}
+
+.img-splash img {
+  width: 600px;
+  margin-top: 200px;
+}
+
 .header-score {
   display: flex;
   flex-direction: row;
@@ -47,6 +74,7 @@ h4 {
   background: url(../images/User_Interface/PopupBox.png) no-repeat center;
   background-size: 1310px;
 }
+
 .logo {
   width: 300px;
   padding-top: 20px;
