@@ -9,6 +9,7 @@ class Game {
     this.character = new Character(75, 600, );
     this.drawBackground = new DrawBackground(1300, 650);
     this.timerGame = new Timer();
+    this.over = new GameOver();
     this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
@@ -22,7 +23,10 @@ class Game {
     this.keys = []
     this.statusNow;
     this.count = 0;
+    this.lives = 18;
+    this.crashValue = 0;
     this.intervalId;
+    this.eventEnter = 0;
   }
 
   clearAll() {
@@ -40,13 +44,13 @@ class Game {
     }
 
     this.statusNow = "running"
-    this.statusGame();
+    this.timerGame.resetChr();
     this.timerGame.startChr()
+    this.statusGame();
     this.controlKeys();
   }
 
   statusGame() {
-
 
     if (this.statusNow === "running") {
       //ROCKET RELOAD
@@ -76,6 +80,9 @@ class Game {
       this.updateGame();
     } else if (this.statusNow === "pause") {
       this.timerGame.pauseChr();
+    } else if (this.statusNow === "gameover") {
+      this.timerGame.pauseChr();
+      this.overGame();
     }
   }
 
@@ -84,37 +91,6 @@ class Game {
     this.clearAll();
     //DRAW THE BACKGROUND
     this.drawBackground.createInfinteBackround(this.ctx);
-
-    // DRAW THE CHARACTER ------------
-    this.character.moveUpAndFall(this.ctx);
-
-    //ROKETS && COLLISINN WITH CHARACTER - -- -- -- -
-    if (this.rockets.length !== 0) {
-      this.rockets.forEach((e) => {
-        if (e.statusRocket) {
-          e.lunchRocket.alertPlayer(this.character.y, this.ctx)
-
-          //colision with character
-          let rocket = {
-            x: e.lunchRocket.xPosition,
-            y: e.lunchRocket.yPosition,
-            w: e.lunchRocket.width,
-            h: e.lunchRocket.height
-          }
-          let character = {
-            x: this.character.x,
-            y: this.character.y,
-            w: this.character.widthObjet,
-            h: this.character.heightObjet
-          }
-          this.collision.detectCollisionRocket(rocket, character, this.ctx);
-
-          if (e.lunchRocket.xPosition < -10) {
-            this.rockets.splice(e.id, 1);
-          }
-        }
-      })
-    }
 
     //ELECTRIC && COLISION
     this.electricWalls = electrical;
@@ -141,7 +117,7 @@ class Game {
         w: this.character.widthObjet,
         h: this.character.heightObjet
       }
-      this.collision.detectCollisionRocket(plataform, character, this.ctx);
+      this.collision.detectCollisionElement(plataform, character, this.ctx);
 
       if (element.x < -element.w) {
         this.drawElectric.shift();
@@ -173,7 +149,7 @@ class Game {
         w: this.character.widthObjet,
         h: this.character.heightObjet
       }
-      if (this.collision.detectCollisionRocket(coin, character, this.ctx)) {
+      if (this.collision.detectCollisionElement(coin, character, this.ctx)) {
         this.coinsAll.splice(index, 1);
         this.coinsPoints++
         if (this.coinsPoints < 10) {
@@ -189,19 +165,114 @@ class Game {
       }
     });
 
-    this.count++;
+    //ROKETS && COLLISINN WITH CHARACTER - -- -- -- -
+    if (this.rockets.length !== 0) {
+      this.rockets.forEach((e) => {
+        if (e.statusRocket) {
+          e.lunchRocket.alertPlayer(this.character.y, this.ctx)
 
+          //colision with character
+          let rocket = {
+            x: e.lunchRocket.x,
+            y: e.lunchRocket.y,
+            w: e.lunchRocket.w,
+            h: e.lunchRocket.h
+          }
+          let character = {
+            x: this.character.x,
+            y: this.character.y,
+            w: this.character.widthObjet,
+            h: this.character.heightObjet
+          }
+          if (this.collision.detectCollisionRocket(rocket, character, this.ctx)) {
+            // if (this.lives == 0) {
+            //   this.statusNow = "gameover";
+            // }
+            this.lives--
+
+            console.log("TCL: Game -> updateGame -> this.lives", this.lives)
+          };
+          this.getlives()
+          if (e.lunchRocket.xPosition < -10) {
+            this.rockets.splice(e.id, 1);
+          }
+        }
+      })
+    }
+
+    // DRAW THE CHARACTER ------------
+    this.character.moveUpAndFall(this.ctx);
+
+    //lOOP THE GAME -------------------
+    if (this.lives <= 0) {
+      this.statusNow = "gameover"
+    }
+    this.count++;
     this.intervalId = requestAnimationFrame(this.statusGame.bind(this));
 
   }
+
   pauseGame() {
     if (this.statusNow === "running") {
       this.statusNow = "pause"
     } else {
       this.statusNow = "running";
       this.statusGame();
-      this.timerGame.startChr();
+      this.timerGame.startChr()
 
+    }
+  }
+  overGame() {
+    this.over.drawBG(this.ctx, this.coinsPoints);
+    cancelAnimationFrame(this.intervalId);
+    this.eventEnter = 1;
+    document.body.addEventListener('keydown', e => {
+      if (e.keyCode === 13 && this.eventEnter === 1) {
+        this.resetValuesInical();
+        this.clearAll()
+        this.startGame();
+        this.eventEnter = 0;
+        console.log("TCL: Game -> overGame -> this.eventEnter", this.eventEnter)
+      }
+
+    });
+
+  }
+  resetValuesInical() {
+    this.swithcRocketOnOff = 1; // on off rockets
+    this.rockets = [];
+    this.numRocket = 10;
+    this.increaseRockets = 1.3;
+    this.drawElectric = [];
+    this.electrical = electrical;
+    this.electricWalls = [];
+    this.cointsPositions = coinsPositionsAll;
+    this.coinsAll = [];
+    this.coinsPoints = 0;
+    this.keys = []
+    this.statusNow;
+    this.count = 0;
+    this.lives = 18;
+    this.crashValue = 0;
+  }
+
+  getlives() {
+    let getLives01 = document.getElementById("live01");
+    let getLives02 = document.getElementById("live02");
+    let getLives03 = document.getElementById("live03");
+    let getLives04 = document.getElementById("live04");
+    let getLives05 = document.getElementById("live04");
+
+    if (this.lives === 24) {
+      getLives05.classList.add("live-out")
+    } else if (this.lives === 18) {
+      getLives04.classList.add("live-out")
+    } else if (this.lives === 12) {
+      getLives03.classList.add("live-out")
+    } else if (this.lives === 6) {
+      getLives02.classList.add("live-out")
+    } else if (this.lives === 0) {
+      getLives01.classList.add("live-out")
     }
   }
 

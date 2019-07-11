@@ -19,7 +19,7 @@
       <div class="img-splash">
         <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
       </div>
-      <button id="start" class="btn-start">START</button>
+      <button id="start" class="">START</button>
     </div>
     <div id="game" class="game">
       <div class="header-score">
@@ -29,11 +29,18 @@
         <div class="lives">
           <h3>LIVES</h3>
           <ul>
-            <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
-            <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
-            <li><img src="images/Items_Sprite/Heals/1.png" alt="" /></li>
+            <li>
+              <img id="live01" src="images/Items_Sprite/Heals/1.png" alt="" />
+            </li>
+            <li>
+              <img id="live02" src="images/Items_Sprite/Heals/1.png" alt="" />
+            </li>
+            <li>
+              <img id="live03" src="images/Items_Sprite/Heals/1.png" alt="" />
+            </li>
             <li>
               <img
+                id="live04"
                 class="live-out"
                 src="images/Items_Sprite/Heals/1.png"
                 alt=""
@@ -41,6 +48,7 @@
             </li>
             <li>
               <img
+                id="live04"
                 class="live-out"
                 src="images/Items_Sprite/Heals/1.png"
                 alt=""
@@ -62,6 +70,7 @@
       </div>
     </div>
     <script src="src/data.js"></script>
+    <script src="src/over.js"></script>
     <script src="src/timer.js"></script>
     <script src="src/coinsPositionsAll.js"></script>
     <script src="src/coins.js"></script>
