@@ -10,6 +10,7 @@ class Timer {
 
     this.startchron = 0;
     this.timerNow;
+    this.setIntervalId;
   }
 
   chronometer() {
@@ -27,7 +28,7 @@ class Timer {
   startChr() {
     this.startchron = 1;
     this.chronometer();
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.chronometer();
     }, 1000);
   }
@@ -41,7 +42,8 @@ class Timer {
     this.seconds = 0;
     this.mints = 0;
     this.startchron = 0;
-    document.getElementById('text-time').innerHTML = this.mints + ' : ' + this.seconds;
+    clearInterval(this.intervalId);
+    //document.getElementById('text-time').innerHTML = this.mints + ' : ' + this.seconds;
   }
 
 }

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-     <!-- SPLASH -->
+    <!-- SPLASH -->
     <div id="splash" class="splash">
       <div class="img-splash">
         <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
@@ -23,20 +23,21 @@
       <button id="start" class="">START</button>
     </div>
     <!-- GAME OVER -->
-    <div id="gameover" class="gameover">
-        <div class="center">
-          <h1>GAME OVER</h1> 
-        </div>
-        <div class="center text">
-          <div class="text-gameover">TIME 00:00</div>
-          <div class="text-gameover">COINS 0000</div>
-          <div>TOTAL SCORE 0000</div>
-  
-        </div>
-        <div>
-          <button id="start" class="">START</button>
-        </div>       
+    <div id="gameover" class="gameover game">
+      <div class="center">
+        <h1>GAME OVER</h1>
       </div>
+      <div class="center text">
+        <div class="text-gameover" id="text-gameover-time">TIME 00:00</div>
+        <div class="text-gameover" id="text-gameover-coins">COINS 0000</div>
+        <div class="text-score-gameover" id="text-gameover-total">
+          TOTAL SCORE 0000
+        </div>
+      </div>
+      <div>
+        <button id="start-game-over" class="">START</button>
+      </div>
+    </div>
     <!-- GAME -->
     <div id="game" class="game">
       <div class="header-score">

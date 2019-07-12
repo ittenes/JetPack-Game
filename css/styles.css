@@ -122,9 +122,9 @@ button {
   color: #9b0439f7;
   text-shadow: 2px 2px rgb(16, 21, 1);
 }
-.gameover{
+.gameover {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   margin: 40px 10% 40px 10%;
   background-size: 1310px;
@@ -135,14 +135,17 @@ button {
   color: rgb(243, 255, 5);
 }
 
-.center{ 
+.center {
   text-align: center;
-
 }
-.text{
+.text {
   margin-top: 40px;
 }
-.text-gameover{
+.text-gameover {
   margin-top: 10px;
   font-size: 2rem;
+}
+.text-score-gameover {
+  margin-top: 10px;
+  font-size: 3rem;
 }

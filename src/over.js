@@ -1,58 +1,33 @@
 class GameOver {
-
   constructor() {
-    this.timer = "10:10";
     this.score;
-    this.btnX = 500;
-    this.btnY = 420;
-    this.btnW = 200;
-    this.btnH = 75;
-
+    this.mints;
+    this.seconds;
   }
 
-  drawBG(ctx, score) {
-    this.score = score;
+  drawBG(ctx, coins, mints, seconds) {
+    this.coins = coins;
+    this.mints = mints;
+    this.seconds = seconds;
+    this.score = Math.round(this.coins * (2 + this.mints + (this.seconds / 60)))
 
-    ctx.fillStyle = "#101501";
-    ctx.fillRect(0, 0, 1224, 650);
+    console.log("TCL: drawBG -> this.coins", this.coins)
+    console.log("TCL: drawBG -> this.mints", this.mints)
+    console.log("TCL: drawBG -> this.seconds", this.seconds)
+    console.log("TCL: drawBG -> this.score", this.score)
 
-    ctx.fillStyle = 'red';
-    ctx.fillRect(this.btnX, this.btnY, this.btnW, this.btnH);
-
-    // BUTTON START CLICK
-    //this.drawData();
-    //this.eventClickButton();
-    ctx.font = '60px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText('GAME OVER', 450, 150);
-
-    ctx.font = '40px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText('TIME', 500, 250);
-
-    ctx.font = '40px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText(2222, 700, 250);
-
-    ctx.font = '40px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText('COINS', 500, 300);
-
-    ctx.font = '40px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText(this.score, 700, 300);
-
-    ctx.font = '60px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText('TOTAL SCORE', 200, 380);
-
-    ctx.font = '60px Bowlby One SC';
-    ctx.fillStyle = "#f3ff05";
-    ctx.fillText('23232', 700, 380);
+    document.getElementById("game").style.display = "none";
+    document.getElementById("gameover").style.display = "block";
+    document.getElementById("text-gameover-time").innerHTML = `TIME ${
+      this.mints
+    } : ${this.seconds}`;
+    document.getElementById("text-gameover-coins").innerHTML = `COINS ${
+      this.coins
+    }`;
+    document.getElementById("text-gameover-total").innerHTML = `TOTALSCORE ${
+      this.score
+    }`;
 
 
   }
-
-
-  drawData() {}
 }
