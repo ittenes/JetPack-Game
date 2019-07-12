@@ -32,7 +32,7 @@ class GameOver {
 
     ctx.font = '40px Bowlby One SC';
     ctx.fillStyle = "#f3ff05";
-    ctx.fillText(this.timer, 700, 250);
+    ctx.fillText(2222, 700, 250);
 
     ctx.font = '40px Bowlby One SC';
     ctx.fillStyle = "#f3ff05";

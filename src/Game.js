@@ -45,7 +45,7 @@ class Game {
 
     this.statusNow = "running"
     this.timerGame.resetChr();
-    this.timerGame.startChr()
+    this.timerGame.startChr();
     this.statusGame();
     this.controlKeys();
   }
@@ -230,6 +230,7 @@ class Game {
       if (e.keyCode === 13 && this.eventEnter === 1) {
         this.resetValuesInical();
         this.clearAll()
+        this.timerGame.resetChr();
         this.startGame();
         this.eventEnter = 0;
         console.log("TCL: Game -> overGame -> this.eventEnter", this.eventEnter)
