@@ -9,24 +9,26 @@ class Timer {
     this.mints = 0;
 
     this.startchron = 0;
+    this.timerNow;
+    this.setIntervalId;
   }
 
   chronometer() {
     if (this.startchron == 1) {
       this.seconds += 1;
     }
-
     if (this.seconds > 59) {
       this.seconds = 0;
       this.mints += 1;
     }
+    this.timerNow = `${this.mints} : ${this.seconds}`;
     document.getElementById('text-time').innerHTML = `${this.mints} : ${this.seconds}`;
   }
 
   startChr() {
     this.startchron = 1;
     this.chronometer();
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.chronometer();
     }, 1000);
   }
@@ -40,7 +42,8 @@ class Timer {
     this.seconds = 0;
     this.mints = 0;
     this.startchron = 0;
-    document.getElementById('text-time').innerHTML = this.mints + ' : ' + this.seconds;
+    clearInterval(this.intervalId);
+    //document.getElementById('text-time').innerHTML = this.mints + ' : ' + this.seconds;
   }
 
 }

@@ -1,6 +1,3 @@
-const STATUS = {
-  RUNNING: "running"
-}
 class Game {
 
   constructor(ctx, electrical) {
@@ -34,6 +31,14 @@ class Game {
   }
 
   startGame() {
+
+    this.resetValuesInical();
+    this.statusNow = "running";
+    this.timerGame.startChr();
+    this.getLives();
+    this.statusGame();
+    this.controlKeys();
+
     for (let i = 0; i < this.numRocket; i++) {
       this.rockets.push({
         id: this.rockets.length,
@@ -42,12 +47,6 @@ class Game {
         timer: Math.floor(Math.random() * 900) + 1
       })
     }
-
-    this.statusNow = "running"
-    this.timerGame.resetChr();
-    this.timerGame.startChr()
-    this.statusGame();
-    this.controlKeys();
   }
 
   statusGame() {
@@ -55,7 +54,7 @@ class Game {
     if (this.statusNow === "running") {
       //ROCKET RELOAD
       if (this.count % 900 == 0 && this.count !== 0) {
-        this.rockets = []
+        //this.rockets = []
         this.numRocket = Math.round(this.numRocket * this.increaseRockets)
         if (this.numRocket > 20) {
           this.numRocket = 20
@@ -185,14 +184,10 @@ class Game {
             h: this.character.heightObjet
           }
           if (this.collision.detectCollisionRocket(rocket, character, this.ctx)) {
-            // if (this.lives == 0) {
-            //   this.statusNow = "gameover";
-            // }
             this.lives--
-
-            console.log("TCL: Game -> updateGame -> this.lives", this.lives)
+            this.character.crash(this.ctx)
           };
-          this.getlives()
+          this.getLives()
           if (e.lunchRocket.xPosition < -10) {
             this.rockets.splice(e.id, 1);
           }
@@ -223,22 +218,34 @@ class Game {
     }
   }
   overGame() {
-    this.over.drawBG(this.ctx, this.coinsPoints);
+    this.over.drawBG(this.ctx, this.coinsPoints, this.timerGame.mints, this.timerGame.seconds);
+    this.timerGame.resetChr();
     cancelAnimationFrame(this.intervalId);
     this.eventEnter = 1;
-    document.body.addEventListener('keydown', e => {
-      if (e.keyCode === 13 && this.eventEnter === 1) {
-        this.resetValuesInical();
-        this.clearAll()
-        this.startGame();
-        this.eventEnter = 0;
-        console.log("TCL: Game -> overGame -> this.eventEnter", this.eventEnter)
-      }
 
-    });
+    // document.body.addEventListener('keydown', e => {
+    //   if (e.keyCode === 13 && this.eventEnter === 1) {
+    //     this.resetValuesInical();
+    //     this.clearAll()
+    //     this.timerGame.resetChr();
+    //     this.startGame();
+    //     this.eventEnter = 0;
+    //     console.log("TCL: Game -> overGame -> this.eventEnter", this.eventEnter)
+    //   }
+
+    // });
 
   }
   resetValuesInical() {
+    //Timer
+    this.timerGame.stmints = 0;
+    this.timerGame.stseconds = 0;
+
+    this.timerGame.seconds = 0;
+    this.timerGame.mints = 0;
+
+    this.timerGame.startchron = 0;
+    // this values
     this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
     this.numRocket = 10;
@@ -254,27 +261,61 @@ class Game {
     this.count = 0;
     this.lives = 18;
     this.crashValue = 0;
+    this.intervalId;
+    this.eventEnter = 0;
+
+
   }
 
-  getlives() {
+  getLives() {
+    let getLives01 = document.getElementById("live01");
+    let getLives02 = document.getElementById("live02");
+    let getLives03 = document.getElementById("live03");
+    let getLives04 = document.getElementById("live04");
+    let getLives05 = document.getElementById("live05");
+
+    if (this.lives > 24) {
+      getLives05.classList.remove("live-out")
+      getLives04.classList.remove("live-out")
+      getLives03.classList.remove("live-out")
+      getLives02.classList.remove("live-out")
+      getLives01.classList.remove("live-out")
+    } else if (this.lives === 24) {
+      getLives05.classList.add("live-out")
+      getLives04.classList.remove("live-out")
+      getLives03.classList.remove("live-out")
+      getLives02.classList.remove("live-out")
+      getLives01.classList.remove("live-out")
+    } else if (this.lives === 18) {
+      getLives04.classList.add("live-out")
+      getLives03.classList.remove("live-out")
+      getLives02.classList.remove("live-out")
+      getLives01.classList.remove("live-out")
+    } else if (this.lives === 12) {
+      getLives03.classList.add("live-out")
+      getLives02.classList.remove("live-out")
+      getLives01.classList.remove("live-out")
+    } else if (this.lives === 6) {
+      getLives02.classList.add("live-out")
+      getLives01.classList.remove("live-out")
+    } else if (this.lives === 0) {
+      getLives01.classList.add("live-out")
+    }
+  }
+
+  addLives() {
     let getLives01 = document.getElementById("live01");
     let getLives02 = document.getElementById("live02");
     let getLives03 = document.getElementById("live03");
     let getLives04 = document.getElementById("live04");
     let getLives05 = document.getElementById("live04");
-
-    if (this.lives === 24) {
-      getLives05.classList.add("live-out")
-    } else if (this.lives === 18) {
-      getLives04.classList.add("live-out")
-    } else if (this.lives === 12) {
-      getLives03.classList.add("live-out")
-    } else if (this.lives === 6) {
-      getLives02.classList.add("live-out")
-    } else if (this.lives === 0) {
-      getLives01.classList.add("live-out")
-    }
   }
+
+
+  roketCreation() {
+
+  }
+
 
   controlKeys() {
     // YOU MANGE DE KEY EVENT ---------------------------
