@@ -6,6 +6,7 @@ class DrawElectric {
     this.w = width;
     this.h = height;
     this.rotation = rotation;
+    this.img = new Image();
 
   }
 
@@ -13,23 +14,17 @@ class DrawElectric {
   createElectric(ctx) {
     if (this.rotation == 0) {
       ctx.save();
-      ctx.fillStyle = "#FFeedd";
-      ctx.fillRect(this.x, this.y, this.w, this.h);
+      this.img.src = 'images/Platform/Terain/11.png'
+      ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
       this.x -= this.speedBg;
       ctx.restore();
 
-    } else if (this.rotation == 6) {
+    } else if (this.rotation == 1) {
       ctx.save();
-      ctx.beginPath();
-      ctx.translate(this.x + this.w / 2, this.y + this.h / 2);
-      ctx.rotate(Math.PI / this.rotation);
-      ctx.translate(-(this.x + this.w / 2), -(this.y + this.h / 2));
-      ctx.fillStyle = "#FFeedd";
-      ctx.fillRect(this.x, this.y, this.w, this.h);
-      ctx.restore();
+      this.img.src = 'images/Platform/Terain/12.png'
+      ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
       this.x -= this.speedBg;
-      //this.y -= (this.speedBg/2);
-
+      ctx.restore();
     }
   }
 
