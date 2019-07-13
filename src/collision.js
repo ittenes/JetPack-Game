@@ -28,7 +28,6 @@ class Collisions {
       this.rocket.y < this.character.y + this.character.h &&
       this.rocket.y + this.rocket.h > this.character.y) {
 
-      this.drow(ctx) // collision detected!
       return true;
     }
 
