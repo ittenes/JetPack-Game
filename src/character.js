@@ -8,7 +8,7 @@ class Character {
     this.heightObjet = 50;
     this.velY = 0;
     this.velX = 0;
-    this.speed = 60; // normal is 4
+    this.speed = 4; // normal is 4
     this.friction = 0.92;
     this.keys = [];
     this.imges = []
