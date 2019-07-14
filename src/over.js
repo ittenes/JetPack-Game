@@ -3,6 +3,7 @@ class GameOver {
     this.score;
     this.mints;
     this.seconds;
+    this.music;
   }
 
   drawBG(ctx, coins, mints, seconds) {
@@ -28,6 +29,12 @@ class GameOver {
       this.score
     }`;
 
+    this.music = document.getElementById("music");
+
+    if (document.getElementById("gameover").style.display === "block") {
+      console.log('muuuuuuusica')
+      this.music.pause()
+    }
 
   }
 }

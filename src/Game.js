@@ -9,7 +9,7 @@ class Game {
     this.over = new GameOver();
     this.swithcRocketOnOff = 0; // 1 = on rockets 0 = off rockets
     this.rockets = [];
-    this.numRocket = 5;
+    this.numRocket = 3;
     this.increaseRockets = 1.3;
     this.drawElectric = [];
     this.electrical = electrical;
@@ -25,8 +25,13 @@ class Game {
     this.intervalId;
     this.eventEnter = 0;
     this.pauseElectrid = 0;
-    this.audioBg = new Audio('sounds/410574__yummie__game-background-music-loop-short.mp3')
-    this.audioCoin = new Audio('sounds/135936__bradwesson__collectcoin.wav')
+    this.pauseRocket = 0;
+    this.audioSwith = 1; // 1 = on audio FX 0 = off audo FX
+    this.audioBg = new Audio('sounds/410574__yummie__game-background-music-loop-short.mp3');
+    this.audioCoin = new Audio('sounds/135936__bradwesson__collectcoin.wav');
+    this.audioRoketHit = new Audio('sounds/215439__taira-komori__shoot01.mp3');
+    this.audioelectricalHit = new Audio('sounds/44430__thecheeseman__hurt3.wav');
+    this.audioTargetLocked = new Audio('sounds/137914__ionicsmusic__robot-voice-target-locked.wav');
     this.countAuidoCoin = 0;
   }
 
@@ -41,17 +46,15 @@ class Game {
     this.getLives();
     this.statusGame();
     this.controlKeys();
-    this.audioBg.play()
-    this.audioBg.volume = 1
   }
 
   statusGame() {
 
     if (this.statusNow === "running") { // GAME IS RUNING AND YOU CAN PLAY
       //ROCKET RELOAD ---------------
-      this.rocketReloaded()
+      this.rocketReloaded();
       //ROCKET ACTIVATION -----------   
-      this.rocketActivatio()
+      this.rocketActivation();
       //UPDATE DE GAME----------------
       this.updateGame();
     } else if (this.statusNow === "pause") { //THE GAME IS PUSED THE TIME IS PUSE TOO
@@ -92,6 +95,7 @@ class Game {
         this.lives -= 6
         this.character.crash(this.ctx);
         this.pauseElectric = this.count + 30;
+        this.audiosPlayGame('audioelectricalHit');
       };
 
       this.getLives();
@@ -121,6 +125,8 @@ class Game {
         h: this.character.heightObjet
       }
       if (this.collision.detectCollisionElement(coin, character, this.ctx)) {
+        //this.audioCoin.play();
+        this.audiosPlayGame("audioCoin");
         this.coinsAll.splice(index, 1);
         this.coinsPoints++
         if (this.coinsPoints < 10) {
@@ -130,13 +136,10 @@ class Game {
         } else {
           document.getElementById("tex-score").innerHTML = `${this.coinsPoints}`;
         }
-        this.audioCoin.play();
-        this.audioCoin.volume = 1
-
-
       };
 
-      if (element.x < -element.w) {
+      if (element.x < -element.w - 600) {
+
         this.coinsAll.shift();
       }
     });
@@ -159,9 +162,11 @@ class Game {
             w: this.character.widthObjet,
             h: this.character.heightObjet
           }
-          if (this.collision.detectCollisionRocket(rocket, character, this.ctx)) {
-            this.lives--
+          if (this.collision.detectCollisionRocket(rocket, character, this.ctx) && this.pauseRocket <= this.count) {
+            this.lives -= 6
             this.character.crash(this.ctx)
+            this.pauseRocket = this.count + 10;
+            this.audiosPlayGame("audioRoketHit");
           };
 
           this.getLives();
@@ -210,10 +215,7 @@ class Game {
     this.timerGame.mints = 0;
     this.timerGame.startchron = 0;
     //This values
-    this.swithcRocketOnOff = 1; // on off rockets
     this.rockets = [];
-    this.numRocket = 10;
-    this.increaseRockets = 1.3;
     this.drawElectric = [];
     this.electrical = electrical;
     this.electricWalls = [];
@@ -275,7 +277,7 @@ class Game {
   }
 
   rocketReloaded() {
-    if (this.count % 900 == 0) {
+    if (this.count % 900 == 0 && this.swithcRocketOnOff && this.count != 0) {
       //this.rockets = []
       this.numRocket = Math.round(this.numRocket * this.increaseRockets)
       if (this.numRocket > 20) {
@@ -289,10 +291,12 @@ class Game {
           timer: Math.floor(Math.random() * ((this.count + 900) - this.count) + this.count)
         })
       }
+      this.audiosPlayGame("targelocked");
     }
   }
 
-  rocketActivatio() {
+  rocketActivation() {
+    console.log("TCL: Game -> rocketActivation -> this.rockets", this.rockets)
     if (this.rockets.length !== 0) {
       this.rockets.forEach((e, i) => {
         if (e.timer == this.count) {
@@ -317,10 +321,8 @@ class Game {
     if (this.cointsPositions.length !== 0) {
       this.cointsPositions.forEach(e => {
         if (e.timer === this.count) {
-          //this.coinsAll.push(new DrawCoins(e.coin[0], e.coin[1]));
           let psoitionY = e.coin[1]
           for (let y = 0; y < e.coin[3]; y++) {
-            //this.coinsAll.push(new DrawCoins(e.coin[0], psoitionY));
             let psoitionX = e.coin[0]
             for (let i = 0; i < e.coin[2]; i++) {
               console.log("TCL: Game -> coinsReloaded -> e.coin[3]", e.coin[3])
@@ -334,19 +336,39 @@ class Game {
     }
   }
 
-
+  audiosPlayGame(audio) {
+    if (this.audioSwith === 1) {
+      if (audio === "audioCoin") {
+        this.audioCoin.play()
+        this.audioCoin = new Audio('sounds/135936__bradwesson__collectcoin.wav')
+      } else if (audio === "audioRoketHit") {
+        this.audioRoketHit.play();
+        this.audioRoketHit = new Audio('sounds/215439__taira-komori__shoot01.mp3')
+      } else if (audio === "audioelectricalHit") {
+        this.audioelectricalHit.play();
+        this.audioelectricalHit = new Audio('sounds/44430__thecheeseman__hurt3.wav')
+      } else if (audio === "targelocked") {
+        this.audioTargetLocked.play();
+        this.audioTargetLocked = new Audio('sounds/137914__ionicsmusic__robot-voice-target-locked.wav')
+      }
+    }
+  }
   controlKeys() {
     // YOU MANGE DE KEY EVENT ---------------------------
     document.body.addEventListener("keydown", e =>
       this.character.keys[e.keyCode] = true);
 
+    document.body.addEventListener("touchstart", e =>
+      this.character.keys[32] = true);
+
     document.body.addEventListener("keyup", e =>
       this.character.keys[e.keyCode] = false);
 
     document.body.addEventListener("keydown", e => {
-      if (e.keyCode === 32) {
-        this.pauseGame();
-
+      if (this.statusNow != "gameover") {
+        if (e.keyCode === 32) {
+          this.pauseGame();
+        }
       }
     })
   }

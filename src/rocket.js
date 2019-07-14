@@ -8,7 +8,7 @@ class Rocket {
     this.launch = 0;
     this.launcher = false;
     this.img = new Image();
-    this.audio = new Audio('sounds/439915__scicofilms-com__video-game-retro-arcade-space-invade-pac-man-classic-80s-vintage-8-bit-atar-ninten-jump.mp3');
+    this.audio = new Audio('sounds/444855__mattix__jet-bypass-03.wav');
     this.countAuido = 0;
 
   }
