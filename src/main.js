@@ -4,8 +4,13 @@ window.onload = function () {
   let btnStart = document.getElementById("start");
   let gameOver = document.getElementById("gameover")
   let btnStartOver = document.getElementById("start-game-over");
+  let music = document.getElementById("music");
 
   document.getElementById('gameover').style.display = "none";
+
+  if (gameOver.style.display === "block") {
+    music.stop()
+  }
 
   btnStart.addEventListener("click", function () {
     gameVisible.style.display = "block";
@@ -20,7 +25,7 @@ window.onload = function () {
     let game = new Game(ctx, electrical);
 
     game.startGame();
-
+    music.play();
   });
 
   btnStartOver.addEventListener("click", function () {
@@ -36,7 +41,6 @@ window.onload = function () {
     let game = new Game(ctx, electrical);
 
     game.startGame();
-
+    music.play();
   });
-
 };

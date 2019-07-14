@@ -2,8 +2,8 @@ class DrawCoins {
   constructor(xPosition, yPosition) {
     this.x = xPosition;
     this.y = yPosition;
-    this.w = 60;
-    this.h = 60;
+    this.w = 50;
+    this.h = 50;
     this.speed = 2;
     this.img = new Image();
     this.countImg = 0;

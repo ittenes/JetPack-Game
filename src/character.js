@@ -8,7 +8,7 @@ class Character {
     this.heightObjet = 50;
     this.velY = 0;
     this.velX = 0;
-    this.speed = 4;
+    this.speed = 60; // normal is 4
     this.friction = 0.92;
     this.keys = [];
     this.imges = []
@@ -19,23 +19,6 @@ class Character {
     this.walking = 0;
   }
 
-  // run(ctx) {
-  //   this.image = new Image();
-  //   this.images = [
-  //     'images/Characters/02/Walk/1.png',
-  //     'images/Characters/02/Walk/2.png',
-  //     'images/Characters/02/Walk/3.png',
-  //     'images/Characters/02/Walk/4.png',
-  //     'images/Characters/02/Walk/5.png',
-  //     'images/Characters/02/Walk/6.png',
-  //     'images/Characters/02/Walk/7.png',
-  //     'images/Characters/02/Walk/8.png'
-  //   ]
-  //   this.images.forEach(element => {
-  //     this.image.src = element;
-  //     ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);
-  //   }); //ROJO CORRE EN EL SUELO
-  // }
   flyUp(ctx) {
     this.image = new Image();
     this.images = [
@@ -109,7 +92,6 @@ class Character {
     this.countImg++;
     this.imgSmoke.src = this.imagesSmoke[this.imgNumberSmoke];
     ctx.drawImage(this.imgSmoke, this.x - 60, this.y + 60, 100, 100);
-
   }
 
   crash(ctx) {
