@@ -7,7 +7,7 @@ class Game {
     this.drawBackground = new DrawBackground(1300, 650);
     this.timerGame = new Timer();
     this.over = new GameOver();
-    this.swithcRocketOnOff = 0; // 1 = on rockets 0 = off rockets
+    this.swithcRocketOnOff = 1; // 1 = on rockets 0 = off rockets
     this.rockets = [];
     this.numRocket = 3;
     this.increaseRockets = 1.3;
@@ -20,7 +20,7 @@ class Game {
     this.keys = []
     this.statusNow;
     this.count = 0;
-    this.lives = 18;
+    this.lives = 200; // start into 18
     this.crashValue = 0;
     this.intervalId;
     this.eventEnter = 0;
@@ -194,9 +194,12 @@ class Game {
     if (this.statusNow === "running") {
       this.statusNow = "pause"
     } else {
+      let music = document.getElementById("music");
+      music.play();
       this.statusNow = "running";
       this.statusGame();
       this.timerGame.startChr()
+
     }
   }
 
@@ -368,6 +371,8 @@ class Game {
       if (this.statusNow != "gameover") {
         if (e.keyCode === 32) {
           this.pauseGame();
+          let music = document.getElementById("music");
+          music.pause();
         }
       }
     })
