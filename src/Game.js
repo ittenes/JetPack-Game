@@ -3,7 +3,7 @@ class Game {
   constructor(ctx, electrical) {
     this.ctx = ctx;
     this.collision = new Collisions()
-    this.character = new Character(75, 600, );
+    this.character = new Character(75, 600);
     this.drawBackground = new DrawBackground(1300, 650);
     this.timerGame = new Timer();
     this.over = new GameOver();
@@ -185,7 +185,7 @@ class Game {
     }
 
     // DRAW THE CHARACTER ------------
-    this.character.moveUpAndFall(this.ctx);
+    this.character.selectCharacter(this.ctx, 0);
 
     //lOOP THE GAME -------------------
     if (this.lives <= 0) {

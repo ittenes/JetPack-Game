@@ -16,8 +16,22 @@ class Character {
     this.imgNumberSmoke = 1;
     this.imgNumberBg = 1;
     this.imgNumerCrash = 1;
+    this.imgNumberMagnetic = 1;
     this.walking = 0;
+    this.typeCharacter;
+    this.countMagnetic = 0;
   }
+
+  selectCharacter(ctx, type) {
+    this.typeCharacter = type;
+    if (this.typeCharacter === 0) {
+      this.moveUpAndFall(ctx);
+    } else if (this.typeCharacter === 0) {
+      changePosition(ctx);
+    }
+  }
+
+  // THIS IS DE CHARACTER 0 YOU NEED PUSS UP ARROW IF YO WANT FLY
 
   flyUp(ctx) {
     this.image = new Image();
@@ -154,5 +168,47 @@ class Character {
     }
 
     //ctx.fillRect(this.x, this.y, this.widthObjet, this.heightObjet);
+  }
+
+
+  //----------------------------------------
+  // THIS IS DE CHARACTER 1 YOU NEED PUSS UP ARROW YOU CAN RUN OVER THE GROUND OR OVER THE CEILING 
+
+  magneticFlay(ctx) {
+    this.image = new Image();
+    this.imagesMagnetic = [
+      'images/Characters/04/Fly2/1.png',
+      'images/Characters/04/Fly2/2.png',
+      'images/Characters/04/Fly2/3.png',
+      'images/Characters/04/Fly2/4.png'
+    ]
+    if (this.countImg >= 4) {
+      this.imgNumberMagnetic++
+      this.countImg = 0;
+      if (this.imgNumberMagnetic > 3) {
+        this.imgNumberMagnetic = 0
+      }
+    }
+    this.countImg++;
+    //this.image.src = this.imagesMagnetic[this.imgNumberMagnetic];
+    this.image.src = 'images/Characters/04/Fly2/1.png'
+    ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);;
+  }
+
+  changePosition(ctx) {
+    this.magneticFlay(ctx)
+    if (this.keys[38]) {
+      // if (this.countMagnetic === 0) {
+      //   this.countMagnetic = 1;
+      // } else {
+      //   this.countMagnetic = 0;
+      // }
+
+      // if (this.crashValue == 1) {
+      //   this.crash(ctx)
+      //   crashValue = 0
+      // }
+
+    }
   }
 }
