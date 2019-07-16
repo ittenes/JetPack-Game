@@ -3,7 +3,7 @@ const electrical = [
   //   classElectric: new DrowElectric(yPosition, height, width, rotation, speed)
   // },
 
-  // verticales
+  // HORIZONTALES
 
   {
     classElectric: [75, 40, 200, 0, 2],
@@ -38,7 +38,7 @@ const electrical = [
     timer: 2400
   },
   {
-    classElectric: [75, 40, 200, 0, 2],
+    classElectric: [175, 40, 200, 0, 2],
     timer: 2900
   },
   {

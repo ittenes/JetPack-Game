@@ -68,7 +68,6 @@ class Game {
   updateGame() {
     //CLEAN THE CANVAS
     this.clearAll();
-    console.log("donde esta el personaje >>>" + this.count);
     //DRAW THE BACKGROUND
     this.drawBackground.createInfinteBackround(this.ctx);
 
@@ -97,20 +96,17 @@ class Game {
         this.pauseElectric = this.count + 30;
         this.audiosPlayGame('audioelectricalHit');
       };
-
       this.getLives();
-
       if (element.x < -element.w) {
         this.drawElectric.shift();
       }
     });
 
-
     //COINS && GET THE COINS
     this.coinsReloaded();
     //ctreate get the coin
     this.coinsAll.forEach((element, index) => {
-      element.createCoins(this.ctx)
+      element.createCoins(this.ctx);
       // colision with character
       let coin = {
         x: element.x,
@@ -126,20 +122,32 @@ class Game {
       }
       if (this.collision.detectCollisionElement(coin, character, this.ctx)) {
         //this.audioCoin.play();
-        this.audiosPlayGame("audioCoin");
-        this.coinsAll.splice(index, 1);
-        this.coinsPoints++
-        if (this.coinsPoints < 10) {
-          document.getElementById("tex-score").innerHTML = `00${this.coinsPoints}`;
-        } else if (this.coinsPoints >= 10 && this.coinsPoints < 100) {
-          document.getElementById("tex-score").innerHTML = `0${this.coinsPoints}`;
-        } else {
-          document.getElementById("tex-score").innerHTML = `${this.coinsPoints}`;
+        if (element.type === 1 || element.type === 0) {
+          this.audiosPlayGame("audioCoin");
+          console.log("TCL: Game -> updateGame -> element.w ", element.w)
+          if (element.w > 50) {
+            this.coinsPoints += 25;
+          } else {
+            this.coinsPoints++
+          }
+          this.coinsAll.splice(index, 1);
+          if (this.coinsPoints < 10) {
+            document.getElementById("tex-score").innerHTML = `00${this.coinsPoints}`;
+          } else if (this.coinsPoints >= 10 && this.coinsPoints < 100) {
+            document.getElementById("tex-score").innerHTML = `0${this.coinsPoints}`;
+          } else {
+            document.getElementById("tex-score").innerHTML = `${this.coinsPoints}`;
+          }
+        } else if (element.type === 2) {
+          this.lives += 6
+          this.getLives();
+          this.coinsAll.splice(index, 1);
+          //lives
+        } else if (element.type === 3) {
+          //powerUp
         }
       };
-
       if (element.x < -element.w - 600) {
-
         this.coinsAll.shift();
       }
     });
@@ -168,9 +176,7 @@ class Game {
             this.pauseRocket = this.count + 10;
             this.audiosPlayGame("audioRoketHit");
           };
-
           this.getLives();
-
           if (e.lunchRocket.xPosition < -10) {
             this.rockets.splice(e.id, 1);
           }
@@ -194,8 +200,6 @@ class Game {
     if (this.statusNow === "running") {
       this.statusNow = "pause"
     } else {
-      let music = document.getElementById("music");
-      music.play();
       this.statusNow = "running";
       this.statusGame();
       this.timerGame.startChr()
@@ -255,28 +259,23 @@ class Game {
       getLives02.classList.remove("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 18) {
+      getLives05.classList.add("live-out")
       getLives04.classList.add("live-out")
       getLives03.classList.remove("live-out")
       getLives02.classList.remove("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 12) {
+      console.log('quito vida')
       getLives03.classList.add("live-out")
       getLives02.classList.remove("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 6) {
+      console.log('quito vida')
       getLives02.classList.add("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 0) {
       getLives01.classList.add("live-out")
     }
-  }
-
-  addLives() {
-    let getLives01 = document.getElementById("live01");
-    let getLives02 = document.getElementById("live02");
-    let getLives03 = document.getElementById("live03");
-    let getLives04 = document.getElementById("live04");
-    let getLives05 = document.getElementById("live04");
   }
 
   rocketReloaded() {
@@ -299,7 +298,6 @@ class Game {
   }
 
   rocketActivation() {
-    console.log("TCL: Game -> rocketActivation -> this.rockets", this.rockets)
     if (this.rockets.length !== 0) {
       this.rockets.forEach((e, i) => {
         if (e.timer == this.count) {
@@ -324,12 +322,12 @@ class Game {
     if (this.cointsPositions.length !== 0) {
       this.cointsPositions.forEach(e => {
         if (e.timer === this.count) {
-          let psoitionY = e.coin[1]
+          let type = e.type;
+          let psoitionY = e.coin[1];
           for (let y = 0; y < e.coin[3]; y++) {
-            let psoitionX = e.coin[0]
+            let psoitionX = e.coin[0];
             for (let i = 0; i < e.coin[2]; i++) {
-              console.log("TCL: Game -> coinsReloaded -> e.coin[3]", e.coin[3])
-              this.coinsAll.push(new DrawCoins(psoitionX, psoitionY))
+              this.coinsAll.push(new DrawCoins(psoitionX, psoitionY, type));
               psoitionX += 50
             }
             psoitionY += 50;
@@ -337,6 +335,7 @@ class Game {
         }
       });
     }
+
   }
 
   audiosPlayGame(audio) {
