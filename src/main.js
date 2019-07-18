@@ -63,6 +63,10 @@ window.onload = function () {
 
     this.music = document.getElementById("music");
     this.music.pause()
+
+
+    console.log("TCL: gameOverFunc -> scoreData", scoreData)
+
     if (scoreData !== null) {
       if (scoreData.length < 10 || scoreData[9].value < score) {
         document.getElementById("formWinner").style.display = "block"
@@ -104,7 +108,6 @@ window.onload = function () {
     });
 
     btnListWinner.addEventListener("click", function () {
-      console.log("TCL: gameOverFunc -> scoreData", scoreData)
 
       scoreData.forEach(e => {
         let node = document.createElement("div");
@@ -119,23 +122,17 @@ window.onload = function () {
 
 
   function createCookie() {
-    if (localStorage.setItem == null) {
-      localStorage.setItem = ("data", "[]")
-    }
+    localStorage.setItem("data", "[]")
+    console.log('uno que va' + localStorage.getItem("data"))
   }
 
   function getDataCookies() {
     let cookiesArr = localStorage.getItem("data")
-    console.log('nueva solo ' + cookiesArr)
     scoreData = JSON.parse(cookiesArr);
-    console.log("ultimo" + scoreData)
+    console.log("TCL: getDataCookies -> scoreData", scoreData)
   }
   createCookie();
   getDataCookies()
-
-  btnListWinner.addEventListener("click", function () {
-
-  });
 
 
 };
