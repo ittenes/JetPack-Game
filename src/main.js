@@ -10,7 +10,7 @@ window.onload = function () {
   let btnCloseListWinner = document.getElementById('list-winner-close');
   let listWinGame = document.getElementById("list-winner-score");
 
-  let scoreData = [];
+  let scoreData;;
 
   document.getElementById('gameover').style.display = "none"; //none
   document.getElementById('buttons-winer-and-start').style.display = "block";
@@ -119,7 +119,7 @@ window.onload = function () {
 
 
   function createCookie() {
-    if (localStorage.setItem == null) {
+    if (localStorage.setItem === null) {
       localStorage.setItem = ("key", "[]")
     }
   }
@@ -133,9 +133,6 @@ window.onload = function () {
   createCookie();
   getDataCookies()
 
-  btnListWinner.addEventListener("click", function () {
-
-  });
 
 
 };
