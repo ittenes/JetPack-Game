@@ -63,13 +63,14 @@ window.onload = function () {
 
     this.music = document.getElementById("music");
     this.music.pause()
-
-    if (scoreData.length < 10 || scoreData[9].value < score) {
-      document.getElementById("formWinner").style.display = "block"
-      document.getElementById("buttons-winer-and-start").style.display = "none"
-    } else {
-      document.getElementById("formWinner").style.display = "none"
-      document.getElementById("buttons-winer-and-start").style.display = "block"
+    if (scoreData !== null) {
+      if (scoreData.length < 10 || scoreData[9].value < score) {
+        document.getElementById("formWinner").style.display = "block"
+        document.getElementById("buttons-winer-and-start").style.display = "none"
+      } else {
+        document.getElementById("formWinner").style.display = "none"
+        document.getElementById("buttons-winer-and-start").style.display = "block"
+      }
     }
 
     btnOkWinner.addEventListener("click", function () {
