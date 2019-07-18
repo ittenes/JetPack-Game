@@ -119,8 +119,10 @@ window.onload = function () {
 
 
   function createCookie() {
-    if (localStorage.setItem === null) {
-      localStorage.setItem = ("key", "[]")
+
+    if (localStorage.setItem == null) {
+      localStorage.setItem = ("data", "[]")
+
     }
   }
 
