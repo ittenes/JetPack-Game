@@ -18,16 +18,15 @@ class Character {
     this.imgNumerCrash = 1;
     this.imgNumberMagnetic = 1;
     this.walking = 0;
-    this.typeCharacter;
+    this.typeCharacter = 0;
     this.countMagnetic = 0;
   }
 
   selectCharacter(ctx, type) {
-    this.typeCharacter = type;
     if (this.typeCharacter === 0) {
       this.moveUpAndFall(ctx);
-    } else if (this.typeCharacter === 0) {
-      changePosition(ctx);
+    } else if (this.typeCharacter === 1) {
+      this.changePosition(ctx);
     }
   }
 
@@ -190,25 +189,96 @@ class Character {
       }
     }
     this.countImg++;
-    //this.image.src = this.imagesMagnetic[this.imgNumberMagnetic];
-    this.image.src = 'images/Characters/04/Fly2/1.png'
-    ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);;
+    if (this.y < this.ceiling) {
+      this.walkUp(ctx);
+    } else if (this.y >= this.ground - this.heightObjet - 30) {
+      this.walkDown(ctx);
+    } else {
+      this.image.src = this.imagesMagnetic[this.imgNumberMagnetic];
+      ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);
+    }
   }
 
   changePosition(ctx) {
-    this.magneticFlay(ctx)
-    if (this.keys[38]) {
-      // if (this.countMagnetic === 0) {
-      //   this.countMagnetic = 1;
-      // } else {
-      //   this.countMagnetic = 0;
-      // }
 
-      // if (this.crashValue == 1) {
-      //   this.crash(ctx)
-      //   crashValue = 0
-      // }
+    if (this.crashValue == 1) {
+      this.crash(ctx)
+      crashValue = 0
+    }
+    this.magneticFlay(ctx);
+    if (this.keys[40]) {
+      this.countMagnetic = 0;
+    }
+    if (this.keys[38]) {
+      this.countMagnetic = 1;
+    }
+    if (this.countMagnetic === 0) {
+      this.magneticdown()
+    } else {
+      this.magneticUp();
+    }
+  }
+
+
+  magneticUp() {
+    if (this.velY > -this.speed) {
+      this.velY--;
+    }
+    this.velY *= this.friction;
+    this.y += this.velY * 1.5;
+    if (this.y <= this.ceiling - 10) {
+      this.y = this.ceiling - 10;
 
     }
+  }
+
+  magneticdown() {
+    if (this.velY < this.speed) {
+      this.velY++;
+    }
+    this.velY *= this.friction;
+    this.y += this.velY * 1.5;
+    if (this.y >= this.ground - this.heightObjet - 30) {
+      this.y = this.ground - this.heightObjet - 30;
+    }
+  }
+
+  walkUp(ctx) {
+    this.image = new Image();
+    this.imagesMagneticUp = [
+      'images/Characters/04/Walk3/1.png',
+      'images/Characters/04/Walk3/2.png',
+      'images/Characters/04/Walk3/5.png',
+      'images/Characters/04/Walk3/8.png'
+    ]
+    if (this.countImg >= 4) {
+      this.imgNumberMagnetic++
+      this.countImg = 0;
+      if (this.imgNumberMagnetic > 3) {
+        this.imgNumberMagnetic = 0
+      }
+    }
+    this.countImg++;
+    this.image.src = this.imagesMagneticUp[this.imgNumberMagnetic];
+    ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);;
+  }
+  walkDown(ctx) {
+    this.image = new Image();
+    this.imagesMagneticDown = [
+      'images/Characters/04/Walk2/1.png',
+      'images/Characters/04/Walk2/2.png',
+      'images/Characters/04/Walk2/5.png',
+      'images/Characters/04/Walk2/8.png'
+    ]
+    if (this.countImg >= 4) {
+      this.imgNumberMagnetic++
+      this.countImg = 0;
+      if (this.imgNumberMagnetic > 3) {
+        this.imgNumberMagnetic = 0
+      }
+    }
+    this.countImg++;
+    this.image.src = this.imagesMagneticDown[this.imgNumberMagnetic];
+    ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);;
   }
 }

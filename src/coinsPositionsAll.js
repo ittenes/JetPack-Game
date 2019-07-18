@@ -129,7 +129,7 @@ const coinsPositionsAll = [
     type: 0
   },
 
-  //BIG COOIN 
+  //BIG COOIN ----------------------------------
   {
     coin: [1200, 275, 1, 1],
     timer: 300,
@@ -181,7 +181,7 @@ const coinsPositionsAll = [
     type: 1
   },
 
-  // LIVES
+  // LIVES------------------------------------
   {
     coin: [500, 275, 1, 1],
     timer: 10,
@@ -236,6 +236,17 @@ const coinsPositionsAll = [
     coin: [1200, 275, 1, 1],
     timer: 8400,
     type: 2
+  },
+  {
+    coin: [1200, 275, 1, 1],
+    timer: 100,
+    type: 3
+  },
+  {
+    coin: [1200, 275, 1, 1],
+    timer: 800,
+    type: 3
   }
+
 
 ]

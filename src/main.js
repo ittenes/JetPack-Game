@@ -22,7 +22,7 @@ window.onload = function () {
     var widthCanvasGlobal = (canvas.width = 1224);
     var heigthCanvasGlobal = (canvas.height = 650);
 
-    let game = new Game(ctx, electrical);
+    let game = new Game(ctx, electrical, gameOverFunc);
 
     game.startGame();
     music.play();
@@ -38,9 +38,31 @@ window.onload = function () {
     var widthCanvasGlobal = (canvas.width = 1224);
     var heigthCanvasGlobal = (canvas.height = 650);
 
-    let game = new Game(ctx, electrical);
+    let game = new Game(ctx, electrical, gameOverFunc);
 
     game.startGame();
     music.play();
   });
+
+  function gameOverFunc(mints, seconds, coins, score) {
+    console.log("gameOver")
+    document.getElementById("game").style.display = "none";
+    document.getElementById("gameover").style.display = "block";
+    document.getElementById("text-gameover-time").innerHTML = `TIME ${
+      mints
+    } : ${seconds}`;
+    document.getElementById("text-gameover-coins").innerHTML = `COINS ${
+      coins
+    }`;
+    document.getElementById("text-gameover-total").innerHTML = `TOTALSCORE ${
+    score
+    }`;
+
+    this.music = document.getElementById("music");
+
+    if (document.getElementById("gameover").style.display === "block") {
+      console.log('muuuuuuusica')
+      this.music.pause()
+    }
+  }
 };
