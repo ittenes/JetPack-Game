@@ -1,12 +1,13 @@
 class Game {
 
-  constructor(ctx, electrical) {
+  constructor(ctx, electrical, cb) {
     this.ctx = ctx;
     this.collision = new Collisions()
     this.character = new Character(75, 600);
     this.drawBackground = new DrawBackground(1300, 650);
     this.timerGame = new Timer();
     this.over = new GameOver();
+    this.gameOver = cb;
     this.swithcRocketOnOff = 1; // 1 = on rockets 0 = off rockets
     this.rockets = [];
     this.numRocket = 3;
@@ -20,7 +21,7 @@ class Game {
     this.keys = []
     this.statusNow;
     this.count = 0;
-    this.lives = 200; // start into 18
+    this.lives = 18; // start 18
     this.crashValue = 0;
     this.intervalId;
     this.eventEnter = 0;
@@ -32,6 +33,7 @@ class Game {
     this.audioRoketHit = new Audio('sounds/215439__taira-komori__shoot01.mp3');
     this.audioelectricalHit = new Audio('sounds/44430__thecheeseman__hurt3.wav');
     this.audioTargetLocked = new Audio('sounds/137914__ionicsmusic__robot-voice-target-locked.wav');
+    this.audioTransformation = new Audio('sounds/audioTransformation.wav');
     this.countAuidoCoin = 0;
   }
 
@@ -89,9 +91,13 @@ class Game {
         w: this.character.widthObjet,
         h: this.character.heightObjet
       }
-      if (this.collision.detectCollisionElement(plataform, character, this.ctx) && this.pauseElectric <= this.count) {
-
+      if (this.collision.detectCollisionElement(plataform, character, this.ctx) && this.pauseElectric <= this.count && this.character.typeCharacter === 0) {
         this.lives -= 6
+        this.character.crash(this.ctx);
+        this.pauseElectric = this.count + 30;
+        this.audiosPlayGame('audioelectricalHit');
+      } else if (this.collision.detectCollisionElement(plataform, character, this.ctx) && this.pauseElectric <= this.count) {
+        this.character.typeCharacter = 0;
         this.character.crash(this.ctx);
         this.pauseElectric = this.count + 30;
         this.audiosPlayGame('audioelectricalHit');
@@ -120,6 +126,7 @@ class Game {
         w: this.character.widthObjet,
         h: this.character.heightObjet
       }
+
       if (this.collision.detectCollisionElement(coin, character, this.ctx)) {
         //this.audioCoin.play();
         if (element.type === 1 || element.type === 0) {
@@ -144,7 +151,8 @@ class Game {
           this.coinsAll.splice(index, 1);
           //lives
         } else if (element.type === 3) {
-          //powerUp
+          this.character.typeCharacter = 1;
+          this.coinsAll.splice(index, 1);
         }
       };
       if (element.x < -element.w - 600) {
@@ -170,8 +178,13 @@ class Game {
             w: this.character.widthObjet,
             h: this.character.heightObjet
           }
-          if (this.collision.detectCollisionRocket(rocket, character, this.ctx) && this.pauseRocket <= this.count) {
+          if (this.collision.detectCollisionRocket(rocket, character, this.ctx) && this.pauseRocket <= this.count && this.character.typeCharacter === 0) {
             this.lives -= 6
+            this.character.crash(this.ctx)
+            this.pauseRocket = this.count + 10;
+            this.audiosPlayGame("audioRoketHit");
+          } else if (this.collision.detectCollisionRocket(rocket, character, this.ctx) && this.pauseRocket <= this.count) {
+            this.character.typeCharacter = 0;
             this.character.crash(this.ctx)
             this.pauseRocket = this.count + 10;
             this.audiosPlayGame("audioRoketHit");
@@ -185,7 +198,9 @@ class Game {
     }
 
     // DRAW THE CHARACTER ------------
-    this.character.selectCharacter(this.ctx, 0);
+
+    console.log("TCL: Game -> updateGame -> this.character.typeCharacter", this.character.typeCharacter)
+    this.character.selectCharacter(this.ctx, this.character.typeCharacter);
 
     //lOOP THE GAME -------------------
     if (this.lives <= 0) {
@@ -208,7 +223,7 @@ class Game {
   }
 
   overGame() {
-    this.over.drawBG(this.ctx, this.coinsPoints, this.timerGame.mints, this.timerGame.seconds);
+    this.over.drawBG(this.ctx, this.coinsPoints, this.timerGame.mints, this.timerGame.seconds, this.gameOver);
     this.timerGame.resetChr();
     cancelAnimationFrame(this.intervalId);
     this.eventEnter = 1;
@@ -352,6 +367,9 @@ class Game {
       } else if (audio === "targelocked") {
         this.audioTargetLocked.play();
         this.audioTargetLocked = new Audio('sounds/137914__ionicsmusic__robot-voice-target-locked.wav')
+      } else if (audio === "transformation") {
+        this.audioTransformation.play();
+        this.audioTransformation = new Audio('sounds/audioTransformation.wav')
       }
     }
   }

@@ -33,6 +33,16 @@ class DrawCoins {
       'images/Items_Sprite/Heals/3.png',
       'images/Items_Sprite/Heals/4.png',
     ]
+    this.imagesPowerUP = [
+      'images/Items_Sprite/Power_Up/1.png',
+      'images/Items_Sprite/Power_Up/2.png',
+      'images/Items_Sprite/Power_Up/3.png',
+      'images/Items_Sprite/Power_Up/4.png',
+      'images/Items_Sprite/Power_Up/1.png',
+      'images/Items_Sprite/Power_Up/2.png',
+      'images/Items_Sprite/Power_Up/3.png',
+      'images/Items_Sprite/Power_Up/4.png',
+    ]
 
     if (this.countImg >= 7) {
       this.imgNumerCoin++
@@ -54,6 +64,11 @@ class DrawCoins {
       this.w = 100;
       this.h = 100;
       this.img.src = this.imagesLive[this.imgNumerCoin];
+      ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+    } else if (this.type === 3) {
+      this.w = 100;
+      this.h = 100;
+      this.img.src = this.imagesPowerUP[this.imgNumerCoin];
       ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     }
     this.x -= this.speed;
