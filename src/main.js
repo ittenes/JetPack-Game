@@ -130,7 +130,7 @@ window.onload = function () {
     scoreData = JSON.parse(cookiesArr);
     console.log("ultimo" + scoreData)
   }
-  //createCookie();
+  createCookie();
   getDataCookies()
 
   btnListWinner.addEventListener("click", function () {
