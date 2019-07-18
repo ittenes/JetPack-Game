@@ -122,12 +122,8 @@ window.onload = function () {
 
 
   function createCookie() {
-
-    ===
-    === =
     localStorage.setItem("data", "[]")
-    console.log('uno que va' + localStorage.getItem("data")) >>>
-      >>> > Development
+    console.log('uno que va' + localStorage.getItem("data"))
   }
 
   function getDataCookies() {
@@ -137,12 +133,5 @@ window.onload = function () {
   }
   createCookie();
   getDataCookies()
-
-    <<
-    << << < HEAD
-
-    ===
-    === = >>>
-    >>> > Development
 
 };
