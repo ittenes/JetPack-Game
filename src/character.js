@@ -226,8 +226,8 @@ class Character {
     }
     this.velY *= this.friction;
     this.y += this.velY * 1.5;
-    if (this.y <= this.ceiling - 10) {
-      this.y = this.ceiling - 10;
+    if (this.y <= this.ceiling - 5) {
+      this.y = this.ceiling - 5;
 
     }
   }
@@ -238,8 +238,8 @@ class Character {
     }
     this.velY *= this.friction;
     this.y += this.velY * 1.5;
-    if (this.y >= this.ground - this.heightObjet - 30) {
-      this.y = this.ground - this.heightObjet - 30;
+    if (this.y >= this.ground - this.heightObjet - 15) {
+      this.y = this.ground - this.heightObjet - 15;
     }
   }
 

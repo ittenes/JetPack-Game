@@ -182,51 +182,47 @@ const coinsPositionsAll = [
   },
 
   // LIVES------------------------------------
-  {
-    coin: [500, 275, 1, 1],
-    timer: 10,
-    type: 2
-  },
-  {
-    coin: [1200, 275, 1, 1],
-    timer: 300,
-    type: 2
-  },
-  {
-    coin: [1200, 500, 1, 1],
-    timer: 1300,
-    type: 2
-  },
+
+  // {
+  //   coin: [1200, 275, 1, 1],
+  //   timer: 300,
+  //   type: 2
+  // },
+  // {
+  //   coin: [1200, 500, 1, 1],
+  //   timer: 1300,
+  //   type: 2
+  // },
   {
     coin: [1200, 75, 1, 1],
     timer: 2100,
     type: 2
   },
-  {
-    coin: [1200, 75, 1, 1],
-    timer: 3050,
-    type: 2
-  },
-  {
-    coin: [1200, 250, 1, 1],
-    timer: 4050,
-    type: 2
-  },
+  // {
+  //   coin: [1200, 75, 1, 1],
+  //   timer: 3050,
+  //   type: 2
+  // },
+  //{
+  //   coin: [1200, 250, 1, 1],
+  //   timer: 4050,
+  //   type: 2
+  // },
   {
     coin: [1200, 350, 1, 1],
     timer: 4900,
     type: 2
   },
-  {
-    coin: [1200, 275, 1, 1],
-    timer: 5700,
-    type: 2
-  },
-  {
-    coin: [1200, 275, 1, 1],
-    timer: 6600,
-    type: 2
-  },
+  // {
+  //   coin: [1200, 275, 1, 1],
+  //   timer: 5700,
+  //   type: 2
+  // },
+  // {
+  //   coin: [1200, 275, 1, 1],
+  //   timer: 6600,
+  //   type: 2
+  // },
   {
     coin: [1200, 275, 1, 1],
     timer: 7500,
@@ -237,6 +233,9 @@ const coinsPositionsAll = [
     timer: 8400,
     type: 2
   },
+
+  // TRANSFORMATIONS------------------------------------
+
   {
     coin: [1200, 275, 1, 1],
     timer: 100,
@@ -247,6 +246,5 @@ const coinsPositionsAll = [
     timer: 800,
     type: 3
   }
-
 
 ]
