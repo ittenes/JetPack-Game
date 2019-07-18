@@ -10,6 +10,8 @@ window.onload = function () {
   let btnCloseListWinner = document.getElementById('list-winner-close');
   let listWinGame = document.getElementById("list-winner-score");
 
+  let scoreData = [];
+
   document.getElementById('gameover').style.display = "none"; //none
   document.getElementById('buttons-winer-and-start').style.display = "block";
 
@@ -114,7 +116,6 @@ window.onload = function () {
 
   }
 
-  let scoreData = [];
 
   function createCookie() {
     if (localStorage.setItem == null) {
