@@ -151,6 +151,7 @@ class Game {
           this.coinsAll.splice(index, 1);
           //lives
         } else if (element.type === 3) {
+          this.audiosPlayGame("transformation");
           this.character.typeCharacter = 1;
           this.coinsAll.splice(index, 1);
         }
