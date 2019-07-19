@@ -64,25 +64,24 @@ window.onload = function () {
     this.music = document.getElementById("music");
     this.music.pause()
 
-
+    let scoreNew = score
     console.log("TCL: gameOverFunc -> scoreData", scoreData)
+    console.log("TCL: gameOverFunc -> score", score)
 
-    if (scoreData !== null) {
-      if (scoreData.length < 10 || scoreData[9].value < score) {
-        document.getElementById("formWinner").style.display = "block"
-        document.getElementById("buttons-winer-and-start").style.display = "none"
-      } else {
-        document.getElementById("formWinner").style.display = "none"
-        document.getElementById("buttons-winer-and-start").style.display = "block"
-      }
+    if (scoreData.length < 10 || scoreData[9].value < scoreNew) {
+      document.getElementById("formWinner").style.display = "block"
+      document.getElementById("buttons-winer-and-start").style.display = "none"
+    } else {
+      document.getElementById("formWinner").style.display = "none"
+      document.getElementById("buttons-winer-and-start").style.display = "block"
     }
 
     btnOkWinner.addEventListener("click", function () {
-      let valueScore = score
+      //let valueScore = score
       let nameUser = document.getElementById("name-input").value;
+      console.log("TCL: gameOverFunc -> nameUser", nameUser)
+      console.log("score : " + score)
 
-
-      getDataCookies()
       document.getElementById("formWinner").style.display = "none"
       document.getElementById("buttons-winer-and-start").style.display = "block"
 
@@ -103,12 +102,12 @@ window.onload = function () {
         let json_str = JSON.stringify(newScoreData);
         localStorage.setItem('data', json_str)
       }
-      setDataCookie(valueScore, nameUser)
+      setDataCookie(scoreNew, nameUser)
       getDataCookies()
     });
 
     btnListWinner.addEventListener("click", function () {
-
+      listWinGame.innerHTML = ""
       scoreData.forEach(e => {
         let node = document.createElement("div");
         let text = document.createTextNode(`${e.name}: ${e.value}`);
@@ -122,8 +121,9 @@ window.onload = function () {
 
 
   function createCookie() {
-    localStorage.setItem("data", "[]")
-    console.log('uno que va' + localStorage.getItem("data"))
+    let dataLocalStorage = localStorage.getItem("data");
+    if (dataLocalStorage === null)
+      localStorage.setItem("data", "[]")
   }
 
   function getDataCookies() {
