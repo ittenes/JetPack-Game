@@ -131,7 +131,6 @@ class Game {
         //this.audioCoin.play();
         if (element.type === 1 || element.type === 0) {
           this.audiosPlayGame("audioCoin");
-          console.log("TCL: Game -> updateGame -> element.w ", element.w)
           if (element.w > 50) {
             this.coinsPoints += 25;
           } else {
@@ -200,7 +199,6 @@ class Game {
 
     // DRAW THE CHARACTER ------------
 
-    console.log("TCL: Game -> updateGame -> this.character.typeCharacter", this.character.typeCharacter)
     this.character.selectCharacter(this.ctx, this.character.typeCharacter);
 
     //lOOP THE GAME -------------------
@@ -281,12 +279,10 @@ class Game {
       getLives02.classList.remove("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 12) {
-      console.log('quito vida')
       getLives03.classList.add("live-out")
       getLives02.classList.remove("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 6) {
-      console.log('quito vida')
       getLives02.classList.add("live-out")
       getLives01.classList.remove("live-out")
     } else if (this.lives === 0) {
