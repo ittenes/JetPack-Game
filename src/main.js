@@ -13,21 +13,18 @@ window.onload = function () {
   let scoreData = [];
 
   document.getElementById('gameover').style.display = "none"; //none
-  document.getElementById('buttons-winer-and-start').style.display = "block";
-
+  document.getElementById('buttons-winer-and-start').style.display = "none";
+  document.getElementById('winner').style.display = "none";
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext("2d");
+  let game = new Game(ctx, electrical, gameOverFunc);
 
   btnStart.addEventListener("click", function () {
     gameVisible.style.display = "block";
     splashVisible.style.display = "none";
     gameOver.style.display = "none"
-    let canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
-
     var widthCanvasGlobal = (canvas.width = 1224);
     var heigthCanvasGlobal = (canvas.height = 650);
-
-    let game = new Game(ctx, electrical, gameOverFunc);
-
     game.startGame();
     music.play();
   });
@@ -36,13 +33,13 @@ window.onload = function () {
     gameVisible.style.display = "block";
     splashVisible.style.display = "none";
     gameOver.style.display = "none" //none
-    let canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
+    // let canvas = document.getElementById("canvas");
+    // let ctx = canvas.getContext("2d");
 
     var widthCanvasGlobal = (canvas.width = 1224);
     var heigthCanvasGlobal = (canvas.height = 650);
 
-    let game = new Game(ctx, electrical, gameOverFunc);
+    //let game = new Game(ctx, electrical, gameOverFunc);
 
     game.startGame();
     music.play();
@@ -64,11 +61,8 @@ window.onload = function () {
     this.music = document.getElementById("music");
     this.music.pause()
 
-    let scoreNew = score
-    console.log("TCL: gameOverFunc -> scoreData", scoreData)
-    console.log("TCL: gameOverFunc -> score", score)
 
-    if (scoreData.length < 10 || scoreData[9].value < scoreNew) {
+    if (scoreData.length < 10 || scoreData[9].value < score) {
       document.getElementById("formWinner").style.display = "block"
       document.getElementById("buttons-winer-and-start").style.display = "none"
     } else {
@@ -77,33 +71,13 @@ window.onload = function () {
     }
 
     btnOkWinner.addEventListener("click", function () {
-      //let valueScore = score
       let nameUser = document.getElementById("name-input").value;
-      console.log("TCL: gameOverFunc -> nameUser", nameUser)
-      console.log("score : " + score)
-
       document.getElementById("formWinner").style.display = "none"
       document.getElementById("buttons-winer-and-start").style.display = "block"
 
-      function setDataCookie(valueScore, nameUser) {
-        scoreData.push({
-          name: nameUser,
-          value: valueScore
-        });
-
-        if (scoreData.length !== 0) {
-          newScoreData = scoreData.sort(function (a, b) {
-            return (b.value - a.value)
-          })
-        }
-        if (scoreData.length > 10) {
-          scoreData.pop();
-        }
-        let json_str = JSON.stringify(newScoreData);
-        localStorage.setItem('data', json_str)
-      }
-      setDataCookie(scoreNew, nameUser)
+      setDataCookie(score, nameUser)
       getDataCookies()
+      score = null;
     });
 
     btnListWinner.addEventListener("click", function () {
@@ -113,12 +87,37 @@ window.onload = function () {
         let text = document.createTextNode(`${e.name}: ${e.value}`);
         node.appendChild(text);
         listWinGame.appendChild(node);
-
+        document.getElementById("gameover").style.display = "none";
+        document.getElementById("winner").style.display = "block";
       });
+    });
+    btnCloseListWinner.addEventListener("click", function () {
+      document.getElementById("gameover").style.display = "block";
+      document.getElementById("winner").style.display = "none";
     });
 
   }
 
+  function setDataCookie(valueScore, nameUser) {
+    if (valueScore !== null) {
+      scoreData.push({
+        name: nameUser,
+        value: valueScore
+      });
+
+    }
+
+    if (scoreData.length !== 0) {
+      newScoreData = scoreData.sort(function (a, b) {
+        return (b.value - a.value)
+      })
+    }
+    if (scoreData.length > 10) {
+      scoreData.pop();
+    }
+    let json_str = JSON.stringify(newScoreData);
+    localStorage.setItem('data', json_str)
+  }
 
   function createCookie() {
     let dataLocalStorage = localStorage.getItem("data");
@@ -129,7 +128,6 @@ window.onload = function () {
   function getDataCookies() {
     let cookiesArr = localStorage.getItem("data")
     scoreData = JSON.parse(cookiesArr);
-    console.log("TCL: getDataCookies -> scoreData", scoreData)
   }
   createCookie();
   getDataCookies()
