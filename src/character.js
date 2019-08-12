@@ -11,7 +11,7 @@ class Character {
     this.speed = 4; // normal is 4
     this.friction = 0.92;
     this.keys = [];
-    this.imges = []
+    this.imges = [];
     this.countImg = 0;
     this.imgNumberSmoke = 1;
     this.imgNumberBg = 1;
@@ -35,46 +35,46 @@ class Character {
   flyUp(ctx) {
     this.image = new Image();
     this.images = [
-      'images/Characters/02/Fly/1.png',
-      'images/Characters/02/Fly/2.png',
-      'images/Characters/02/Fly/3.png',
-      'images/Characters/02/Fly/4.png'
-    ]
-    this.image.src = 'images/Characters/02/Fly/1.png';
+      "images/Characters/02/Fly/1.png",
+      "images/Characters/02/Fly/2.png",
+      "images/Characters/02/Fly/3.png",
+      "images/Characters/02/Fly/4.png"
+    ];
+    this.image.src = "images/Characters/02/Fly/1.png";
     ctx.drawImage(this.image, this.x - 25, this.y - 25, 100, 100);
   }
 
   flyDown(ctx, walking) {
     this.imageBg = new Image();
     this.images = [
-      'images/Characters/02/Fly/1.png',
-      'images/Characters/02/Fly/2.png',
-      'images/Characters/02/Fly/3.png',
-      'images/Characters/02/Fly/4.png',
-      'images/Characters/02/Walk/1.png',
-      'images/Characters/02/Walk/2.png',
-      'images/Characters/02/Walk/3.png',
-      'images/Characters/02/Walk/4.png',
-      'images/Characters/02/Walk/5.png',
-      'images/Characters/02/Walk/6.png',
-      'images/Characters/02/Walk/7.png',
-      'images/Characters/02/Walk/8.png'
-    ]
+      "images/Characters/02/Fly/1.png",
+      "images/Characters/02/Fly/2.png",
+      "images/Characters/02/Fly/3.png",
+      "images/Characters/02/Fly/4.png",
+      "images/Characters/02/Walk/1.png",
+      "images/Characters/02/Walk/2.png",
+      "images/Characters/02/Walk/3.png",
+      "images/Characters/02/Walk/4.png",
+      "images/Characters/02/Walk/5.png",
+      "images/Characters/02/Walk/6.png",
+      "images/Characters/02/Walk/7.png",
+      "images/Characters/02/Walk/8.png"
+    ];
 
     if (walking === 0) {
       if (this.countImg == 4) {
-        this.imgNumberBg++
+        this.imgNumberBg++;
         this.countImg = 0;
         if (this.imgNumberBg > 3) {
-          this.imgNumberBg = 0
+          this.imgNumberBg = 0;
         }
       }
     } else if (walking === 1) {
       if (this.countImg == 12) {
-        this.imgNumberBg++
+        this.imgNumberBg++;
         this.countImg = 4;
         if (this.imgNumberBg > 11) {
-          this.imgNumberBg = 4
+          this.imgNumberBg = 4;
         }
       }
     }
@@ -82,23 +82,22 @@ class Character {
     this.countImg++;
     this.imageBg.src = this.images[this.imgNumberBg];
     ctx.drawImage(this.imageBg, this.x - 25, this.y - 25, 100, 100);
-
   }
 
   smokes(ctx) {
     this.imgSmoke = new Image();
     this.imagesSmoke = [
-      'images/Characters/Jetpack Smoke/1.png',
-      'images/Characters/Jetpack Smoke/2.png',
-      'images/Characters/Jetpack Smoke/3.png',
-      'images/Characters/Jetpack Smoke/4.png',
-    ]
+      "images/Characters/Jetpack Smoke/1.png",
+      "images/Characters/Jetpack Smoke/2.png",
+      "images/Characters/Jetpack Smoke/3.png",
+      "images/Characters/Jetpack Smoke/4.png"
+    ];
 
     if (this.countImg >= 4) {
-      this.imgNumberSmoke++
+      this.imgNumberSmoke++;
       this.countImg = 0;
       if (this.imgNumberSmoke > 3) {
-        this.imgNumberSmoke = 0
+        this.imgNumberSmoke = 0;
       }
     }
 
@@ -110,19 +109,19 @@ class Character {
   crash(ctx) {
     this.imgCrash = new Image();
     this.imagesCrash = [
-      'images/CollisionFX/02/1.png ',
-      'images/CollisionFX/02/2.png ',
-      'images/CollisionFX/02/3.png ',
-      'images/CollisionFX/02/4.png ',
-      'images/CollisionFX/02/5.png ',
-      'images/CollisionFX/02/6.png ',
-      'images/CollisionFX/02/7.png '
-    ]
+      "images/CollisionFX/02/1.png ",
+      "images/CollisionFX/02/2.png ",
+      "images/CollisionFX/02/3.png ",
+      "images/CollisionFX/02/4.png ",
+      "images/CollisionFX/02/5.png ",
+      "images/CollisionFX/02/6.png ",
+      "images/CollisionFX/02/7.png "
+    ];
     if (this.countImg >= 4) {
-      this.imgNumerCrash++
+      this.imgNumerCrash++;
       this.countImg = 0;
       if (this.imgNumerCrash > 3) {
-        this.imgNumerCrash = 0
+        this.imgNumerCrash = 0;
       }
     }
     this.imgCrash.src = this.imagesCrash[this.imgNumerCrash];
@@ -130,19 +129,18 @@ class Character {
   }
 
   moveUpAndFall(ctx) {
-
     if (this.keys[38]) {
       if (this.crashValue == 1) {
-        this.crash(ctx)
-        crashValue = 0
+        this.crash(ctx);
+        crashValue = 0;
       }
-      this.flyUp(ctx) // go up
-      this.smokes(ctx)
+      this.flyUp(ctx); // go up
+      this.smokes(ctx);
       if (this.velY > -this.speed) {
         this.velY--;
       }
     } else {
-      this.flyDown(ctx, this.walking) // fall down
+      this.flyDown(ctx, this.walking); // fall down
       if (this.velY < this.speed) {
         this.velY++;
       }
@@ -153,7 +151,6 @@ class Character {
 
     if (this.y > this.ground - this.heightObjet) {
       this.y = this.ground - this.heightObjet;
-
     } else if (this.y <= this.ceiling) {
       this.y = this.ceiling;
       this.walking = 0;
@@ -169,23 +166,22 @@ class Character {
     //ctx.fillRect(this.x, this.y, this.widthObjet, this.heightObjet);
   }
 
-
   //----------------------------------------
-  // THIS IS DE CHARACTER 1 YOU NEED PUSS UP ARROW YOU CAN RUN OVER THE GROUND OR OVER THE CEILING 
+  // THIS IS DE CHARACTER 1 YOU NEED PUSS UP ARROW YOU CAN RUN OVER THE GROUND OR OVER THE CEILING
 
   magneticFlay(ctx) {
     this.image = new Image();
     this.imagesMagnetic = [
-      'images/Characters/04/Fly2/1.png',
-      'images/Characters/04/Fly2/2.png',
-      'images/Characters/04/Fly2/3.png',
-      'images/Characters/04/Fly2/4.png'
-    ]
+      "images/Characters/04/Fly2/1.png",
+      "images/Characters/04/Fly2/2.png",
+      "images/Characters/04/Fly2/3.png",
+      "images/Characters/04/Fly2/4.png"
+    ];
     if (this.countImg >= 4) {
-      this.imgNumberMagnetic++
+      this.imgNumberMagnetic++;
       this.countImg = 0;
       if (this.imgNumberMagnetic > 3) {
-        this.imgNumberMagnetic = 0
+        this.imgNumberMagnetic = 0;
       }
     }
     this.countImg++;
@@ -200,10 +196,9 @@ class Character {
   }
 
   changePosition(ctx) {
-
     if (this.crashValue == 1) {
-      this.crash(ctx)
-      crashValue = 0
+      this.crash(ctx);
+      crashValue = 0;
     }
     this.magneticFlay(ctx);
     if (this.keys[40]) {
@@ -213,12 +208,11 @@ class Character {
       this.countMagnetic = 1;
     }
     if (this.countMagnetic === 0) {
-      this.magneticdown()
+      this.magneticdown();
     } else {
       this.magneticUp();
     }
   }
-
 
   magneticUp() {
     if (this.velY > -this.speed) {
@@ -228,7 +222,6 @@ class Character {
     this.y += this.velY * 1.5;
     if (this.y <= this.ceiling - 5) {
       this.y = this.ceiling - 5;
-
     }
   }
 
@@ -246,39 +239,39 @@ class Character {
   walkUp(ctx) {
     this.image = new Image();
     this.imagesMagneticUp = [
-      'images/Characters/04/Walk3/1.png',
-      'images/Characters/04/Walk3/2.png',
-      'images/Characters/04/Walk3/5.png',
-      'images/Characters/04/Walk3/8.png'
-    ]
+      "images/Characters/04/Walk3/1.png",
+      "images/Characters/04/Walk3/2.png",
+      "images/Characters/04/Walk3/5.png",
+      "images/Characters/04/Walk3/8.png"
+    ];
     if (this.countImg >= 4) {
-      this.imgNumberMagnetic++
+      this.imgNumberMagnetic++;
       this.countImg = 0;
       if (this.imgNumberMagnetic > 3) {
-        this.imgNumberMagnetic = 0
+        this.imgNumberMagnetic = 0;
       }
     }
     this.countImg++;
     this.image.src = this.imagesMagneticUp[this.imgNumberMagnetic];
-    ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);;
+    ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);
   }
   walkDown(ctx) {
     this.image = new Image();
     this.imagesMagneticDown = [
-      'images/Characters/04/Walk2/1.png',
-      'images/Characters/04/Walk2/2.png',
-      'images/Characters/04/Walk2/5.png',
-      'images/Characters/04/Walk2/8.png'
-    ]
+      "images/Characters/04/Walk2/1.png",
+      "images/Characters/04/Walk2/2.png",
+      "images/Characters/04/Walk2/5.png",
+      "images/Characters/04/Walk2/8.png"
+    ];
     if (this.countImg >= 4) {
-      this.imgNumberMagnetic++
+      this.imgNumberMagnetic++;
       this.countImg = 0;
       if (this.imgNumberMagnetic > 3) {
-        this.imgNumberMagnetic = 0
+        this.imgNumberMagnetic = 0;
       }
     }
     this.countImg++;
     this.image.src = this.imagesMagneticDown[this.imgNumberMagnetic];
-    ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);;
+    ctx.drawImage(this.image, this.x - 25, this.y - 25, 125, 125);
   }
 }

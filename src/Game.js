@@ -198,7 +198,6 @@ class Game {
             w: this.character.widthObjet,
             h: this.character.heightObjet
           };
-
           if (
             this.collision.detectCollisionRocket(rocket, character, this.ctx) &&
             this.pauseRocket <= this.count &&
@@ -419,10 +418,19 @@ class Game {
       e => (this.character.keys[e.keyCode] = true)
     );
 
-    document.body.addEventListener(
-      "touchstart",
-      e => (this.character.keys[32] = true)
-    );
+    document.body.addEventListener("touchstart", e => {
+      if (e.changedTouches[0]) {
+        this.character.keys[38] = true;
+        console.log("paso");
+      }
+    });
+
+    document.body.addEventListener("touchend", e => {
+      if (e.changedTouches[0]) {
+        this.character.keys[38] = false;
+        console.log("nuveo paso");
+      }
+    });
 
     document.body.addEventListener(
       "keyup",
