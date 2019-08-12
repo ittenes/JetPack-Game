@@ -1,8 +1,7 @@
 class Game {
-
   constructor(ctx, electrical, cb) {
     this.ctx = ctx;
-    this.collision = new Collisions()
+    this.collision = new Collisions();
     this.character = new Character(75, 600);
     this.drawBackground = new DrawBackground(1300, 650);
     this.timerGame = new Timer();
@@ -18,7 +17,7 @@ class Game {
     this.cointsPositions = coinsPositionsAll;
     this.coinsAll = [];
     this.coinsPoints = 0;
-    this.keys = []
+    this.keys = [];
     this.statusNow;
     this.count = 0;
     this.lives = 18; // start 18
@@ -28,12 +27,18 @@ class Game {
     this.pauseElectrid = 0;
     this.pauseRocket = 0;
     this.audioSwith = 1; // 1 = on audio FX 0 = off audo FX
-    this.audioBg = new Audio('sounds/410574__yummie__game-background-music-loop-short.mp3');
-    this.audioCoin = new Audio('sounds/135936__bradwesson__collectcoin.wav');
-    this.audioRoketHit = new Audio('sounds/215439__taira-komori__shoot01.mp3');
-    this.audioelectricalHit = new Audio('sounds/44430__thecheeseman__hurt3.wav');
-    this.audioTargetLocked = new Audio('sounds/137914__ionicsmusic__robot-voice-target-locked.wav');
-    this.audioTransformation = new Audio('sounds/audioTransformation.wav');
+    this.audioBg = new Audio(
+      "sounds/410574__yummie__game-background-music-loop-short.mp3"
+    );
+    this.audioCoin = new Audio("sounds/135936__bradwesson__collectcoin.wav");
+    this.audioRoketHit = new Audio("sounds/215439__taira-komori__shoot01.mp3");
+    this.audioelectricalHit = new Audio(
+      "sounds/44430__thecheeseman__hurt3.wav"
+    );
+    this.audioTargetLocked = new Audio(
+      "sounds/137914__ionicsmusic__robot-voice-target-locked.wav"
+    );
+    this.audioTransformation = new Audio("sounds/audioTransformation.wav");
     this.countAuidoCoin = 0;
   }
 
@@ -51,17 +56,19 @@ class Game {
   }
 
   statusGame() {
-
-    if (this.statusNow === "running") { // GAME IS RUNING AND YOU CAN PLAY
+    if (this.statusNow === "running") {
+      // GAME IS RUNING AND YOU CAN PLAY
       //ROCKET RELOAD ---------------
       this.rocketReloaded();
-      //ROCKET ACTIVATION -----------   
+      //ROCKET ACTIVATION -----------
       this.rocketActivation();
       //UPDATE DE GAME----------------
       this.updateGame();
-    } else if (this.statusNow === "pause") { //THE GAME IS PUSED THE TIME IS PUSE TOO
+    } else if (this.statusNow === "pause") {
+      //THE GAME IS PUSED THE TIME IS PUSE TOO
       this.timerGame.pauseChr();
-    } else if (this.statusNow === "gameover") { //GAME OVER YOU NEED TO RE-START
+    } else if (this.statusNow === "gameover") {
+      //GAME OVER YOU NEED TO RE-START
       this.timerGame.pauseChr();
       this.overGame();
     }
@@ -75,33 +82,40 @@ class Game {
 
     //ELECTRIC && COLISION
     this.electricReloaded();
-    //ctreate electrica wall 
+    //ctreate electrica wall
     this.drawElectric.forEach(element => {
-      element.createElectric(this.ctx)
-      //ctreate elctrica y collision 
+      element.createElectric(this.ctx);
+      //ctreate elctrica y collision
       let plataform = {
         x: element.x,
         y: element.y,
         w: element.w,
         h: element.h
-      }
+      };
       let character = {
         x: this.character.x,
         y: this.character.y,
         w: this.character.widthObjet,
         h: this.character.heightObjet
-      }
-      if (this.collision.detectCollisionElement(plataform, character, this.ctx) && this.pauseElectric <= this.count && this.character.typeCharacter === 0) {
-        this.lives -= 6
+      };
+      if (
+        this.collision.detectCollisionElement(plataform, character, this.ctx) &&
+        this.pauseElectric <= this.count &&
+        this.character.typeCharacter === 0
+      ) {
+        this.lives -= 6;
         this.character.crash(this.ctx);
         this.pauseElectric = this.count + 30;
-        this.audiosPlayGame('audioelectricalHit');
-      } else if (this.collision.detectCollisionElement(plataform, character, this.ctx) && this.pauseElectric <= this.count) {
+        this.audiosPlayGame("audioelectricalHit");
+      } else if (
+        this.collision.detectCollisionElement(plataform, character, this.ctx) &&
+        this.pauseElectric <= this.count
+      ) {
         this.character.typeCharacter = 0;
         this.character.crash(this.ctx);
         this.pauseElectric = this.count + 30;
-        this.audiosPlayGame('audioelectricalHit');
-      };
+        this.audiosPlayGame("audioelectricalHit");
+      }
       this.getLives();
       if (element.x < -element.w) {
         this.drawElectric.shift();
@@ -119,13 +133,13 @@ class Game {
         y: element.y,
         w: element.w,
         h: element.h
-      }
+      };
       let character = {
         x: this.character.x,
         y: this.character.y,
         w: this.character.widthObjet,
         h: this.character.heightObjet
-      }
+      };
 
       if (this.collision.detectCollisionElement(coin, character, this.ctx)) {
         //this.audioCoin.play();
@@ -134,18 +148,24 @@ class Game {
           if (element.w > 50) {
             this.coinsPoints += 25;
           } else {
-            this.coinsPoints++
+            this.coinsPoints++;
           }
           this.coinsAll.splice(index, 1);
           if (this.coinsPoints < 10) {
-            document.getElementById("tex-score").innerHTML = `00${this.coinsPoints}`;
+            document.getElementById("tex-score").innerHTML = `00${
+              this.coinsPoints
+            }`;
           } else if (this.coinsPoints >= 10 && this.coinsPoints < 100) {
-            document.getElementById("tex-score").innerHTML = `0${this.coinsPoints}`;
+            document.getElementById("tex-score").innerHTML = `0${
+              this.coinsPoints
+            }`;
           } else {
-            document.getElementById("tex-score").innerHTML = `${this.coinsPoints}`;
+            document.getElementById("tex-score").innerHTML = `${
+              this.coinsPoints
+            }`;
           }
         } else if (element.type === 2) {
-          this.lives += 6
+          this.lives += 6;
           this.getLives();
           this.coinsAll.splice(index, 1);
           //lives
@@ -154,7 +174,7 @@ class Game {
           this.character.typeCharacter = 1;
           this.coinsAll.splice(index, 1);
         }
-      };
+      }
       if (element.x < -element.w - 600) {
         this.coinsAll.shift();
       }
@@ -162,39 +182,46 @@ class Game {
 
     //ROKETS && COLLISINN WITH CHARACTER - -- -- -- -
     if (this.rockets.length !== 0) {
-      this.rockets.forEach((e) => {
+      this.rockets.forEach(e => {
         if (e.statusRocket === 1) {
-          e.lunchRocket.alertPlayer(this.character.y, this.ctx)
+          e.lunchRocket.alertPlayer(this.character.y, this.ctx);
           //colision with character
           let rocket = {
             x: e.lunchRocket.x,
             y: e.lunchRocket.y,
             w: e.lunchRocket.w,
             h: e.lunchRocket.h
-          }
+          };
           let character = {
             x: this.character.x,
             y: this.character.y,
             w: this.character.widthObjet,
             h: this.character.heightObjet
-          }
-          if (this.collision.detectCollisionRocket(rocket, character, this.ctx) && this.pauseRocket <= this.count && this.character.typeCharacter === 0) {
-            this.lives -= 6
-            this.character.crash(this.ctx)
-            this.pauseRocket = this.count + 10;
-            this.audiosPlayGame("audioRoketHit");
-          } else if (this.collision.detectCollisionRocket(rocket, character, this.ctx) && this.pauseRocket <= this.count) {
-            this.character.typeCharacter = 0;
-            this.character.crash(this.ctx)
-            this.pauseRocket = this.count + 10;
-            this.audiosPlayGame("audioRoketHit");
           };
+          if (
+            this.collision.detectCollisionRocket(rocket, character, this.ctx) &&
+            this.pauseRocket <= this.count &&
+            this.character.typeCharacter === 0
+          ) {
+            this.lives -= 6;
+            this.character.crash(this.ctx);
+            this.pauseRocket = this.count + 10;
+            this.audiosPlayGame("audioRoketHit");
+          } else if (
+            this.collision.detectCollisionRocket(rocket, character, this.ctx) &&
+            this.pauseRocket <= this.count
+          ) {
+            this.character.typeCharacter = 0;
+            this.character.crash(this.ctx);
+            this.pauseRocket = this.count + 10;
+            this.audiosPlayGame("audioRoketHit");
+          }
           this.getLives();
           if (e.lunchRocket.xPosition < -10) {
             this.rockets.splice(e.id, 1);
           }
         }
-      })
+      });
     }
 
     // DRAW THE CHARACTER ------------
@@ -203,26 +230,30 @@ class Game {
 
     //lOOP THE GAME -------------------
     if (this.lives <= 0) {
-      this.statusNow = "gameover"
+      this.statusNow = "gameover";
     }
     this.count++;
     this.intervalId = requestAnimationFrame(this.statusGame.bind(this));
-
   }
 
   pauseGame() {
     if (this.statusNow === "running") {
-      this.statusNow = "pause"
+      this.statusNow = "pause";
     } else {
       this.statusNow = "running";
       this.statusGame();
-      this.timerGame.startChr()
-
+      this.timerGame.startChr();
     }
   }
 
   overGame() {
-    this.over.drawBG(this.ctx, this.coinsPoints, this.timerGame.mints, this.timerGame.seconds, this.gameOver);
+    this.over.drawBG(
+      this.ctx,
+      this.coinsPoints,
+      this.timerGame.mints,
+      this.timerGame.seconds,
+      this.gameOver
+    );
     this.timerGame.resetChr();
     cancelAnimationFrame(this.intervalId);
     this.eventEnter = 1;
@@ -243,7 +274,7 @@ class Game {
     this.cointsPositions = coinsPositionsAll;
     this.coinsAll = [];
     this.coinsPoints = 0;
-    this.keys = []
+    this.keys = [];
     this.statusNow;
     this.count = 0;
     this.lives = 18;
@@ -261,49 +292,51 @@ class Game {
     let getLives05 = document.getElementById("live05");
 
     if (this.lives > 24) {
-      getLives05.classList.remove("live-out")
-      getLives04.classList.remove("live-out")
-      getLives03.classList.remove("live-out")
-      getLives02.classList.remove("live-out")
-      getLives01.classList.remove("live-out")
+      getLives05.classList.remove("live-out");
+      getLives04.classList.remove("live-out");
+      getLives03.classList.remove("live-out");
+      getLives02.classList.remove("live-out");
+      getLives01.classList.remove("live-out");
     } else if (this.lives === 24) {
-      getLives05.classList.add("live-out")
-      getLives04.classList.remove("live-out")
-      getLives03.classList.remove("live-out")
-      getLives02.classList.remove("live-out")
-      getLives01.classList.remove("live-out")
+      getLives05.classList.add("live-out");
+      getLives04.classList.remove("live-out");
+      getLives03.classList.remove("live-out");
+      getLives02.classList.remove("live-out");
+      getLives01.classList.remove("live-out");
     } else if (this.lives === 18) {
-      getLives05.classList.add("live-out")
-      getLives04.classList.add("live-out")
-      getLives03.classList.remove("live-out")
-      getLives02.classList.remove("live-out")
-      getLives01.classList.remove("live-out")
+      getLives05.classList.add("live-out");
+      getLives04.classList.add("live-out");
+      getLives03.classList.remove("live-out");
+      getLives02.classList.remove("live-out");
+      getLives01.classList.remove("live-out");
     } else if (this.lives === 12) {
-      getLives03.classList.add("live-out")
-      getLives02.classList.remove("live-out")
-      getLives01.classList.remove("live-out")
+      getLives03.classList.add("live-out");
+      getLives02.classList.remove("live-out");
+      getLives01.classList.remove("live-out");
     } else if (this.lives === 6) {
-      getLives02.classList.add("live-out")
-      getLives01.classList.remove("live-out")
+      getLives02.classList.add("live-out");
+      getLives01.classList.remove("live-out");
     } else if (this.lives === 0) {
-      getLives01.classList.add("live-out")
+      getLives01.classList.add("live-out");
     }
   }
 
   rocketReloaded() {
     if (this.count % 900 == 0 && this.swithcRocketOnOff && this.count != 0) {
       //this.rockets = []
-      this.numRocket = Math.round(this.numRocket * this.increaseRockets)
+      this.numRocket = Math.round(this.numRocket * this.increaseRockets);
       if (this.numRocket > 20) {
-        this.numRocket = 20
+        this.numRocket = 20;
       }
       for (let i = 0; i < this.numRocket; i++) {
         this.rockets.push({
           id: this.rockets.length,
           lunchRocket: new Rocket(),
           statusRocket: 0,
-          timer: Math.floor(Math.random() * ((this.count + 900) - this.count) + this.count)
-        })
+          timer: Math.floor(
+            Math.random() * (this.count + 900 - this.count) + this.count
+          )
+        });
       }
       this.audiosPlayGame("targelocked");
     }
@@ -324,7 +357,15 @@ class Game {
     if (this.electricWalls.length !== 0) {
       this.electricWalls.forEach(e => {
         if (e.timer === this.count) {
-          this.drawElectric.push(new DrawElectric(e.classElectric[0], e.classElectric[1], e.classElectric[2], e.classElectric[3], e.classElectric[4]))
+          this.drawElectric.push(
+            new DrawElectric(
+              e.classElectric[0],
+              e.classElectric[1],
+              e.classElectric[2],
+              e.classElectric[3],
+              e.classElectric[4]
+            )
+          );
         }
       });
     }
@@ -340,57 +381,66 @@ class Game {
             let psoitionX = e.coin[0];
             for (let i = 0; i < e.coin[2]; i++) {
               this.coinsAll.push(new DrawCoins(psoitionX, psoitionY, type));
-              psoitionX += 50
+              psoitionX += 50;
             }
             psoitionY += 50;
           }
         }
       });
     }
-
   }
 
   audiosPlayGame(audio) {
     if (this.audioSwith === 1) {
       if (audio === "audioCoin") {
-        this.audioCoin.play()
-        this.audioCoin = new Audio('sounds/135936__bradwesson__collectcoin.wav')
+        this.audioCoin.play();
+        this.audioCoin = new Audio(
+          "sounds/135936__bradwesson__collectcoin.wav"
+        );
       } else if (audio === "audioRoketHit") {
         this.audioRoketHit.play();
-        this.audioRoketHit = new Audio('sounds/215439__taira-komori__shoot01.mp3')
+        this.audioRoketHit = new Audio(
+          "sounds/215439__taira-komori__shoot01.mp3"
+        );
       } else if (audio === "audioelectricalHit") {
         this.audioelectricalHit.play();
-        this.audioelectricalHit = new Audio('sounds/44430__thecheeseman__hurt3.wav')
+        this.audioelectricalHit = new Audio(
+          "sounds/44430__thecheeseman__hurt3.wav"
+        );
       } else if (audio === "targelocked") {
         this.audioTargetLocked.play();
-        this.audioTargetLocked = new Audio('sounds/137914__ionicsmusic__robot-voice-target-locked.wav')
+        this.audioTargetLocked = new Audio(
+          "sounds/137914__ionicsmusic__robot-voice-target-locked.wav"
+        );
       } else if (audio === "transformation") {
         this.audioTransformation.play();
-        this.audioTransformation = new Audio('sounds/audioTransformation.wav')
+        this.audioTransformation = new Audio("sounds/audioTransformation.wav");
       }
     }
   }
   controlKeys() {
     // YOU MANGE DE KEY EVENT ---------------------------
-    document.body.addEventListener("keydown", e =>
-      this.character.keys[e.keyCode] = true);
+    document.body.addEventListener(
+      "keydown",
+      e => (this.character.keys[e.keyCode] = true)
+    );
 
-    document.body.addEventListener("touchstart", e =>
-      this.character.keys[32] = true);
-
-    document.body.addEventListener("keyup", e =>
-      this.character.keys[e.keyCode] = false);
-
-    document.body.addEventListener("keydown", e => {
-      if (this.statusNow != "gameover") {
-        if (e.keyCode === 32) {
-          this.pauseGame();
-          let music = document.getElementById("music");
-          music.pause();
-        }
+    document.body.addEventListener("touchstart", e => {
+      if (e.changedTouches[0]) {
+        this.character.keys[38] = true;
+        console.log("paso");
       }
-    })
+    });
+    document.body.addEventListener("touchend", e => {
+      if (e.changedTouches[0]) {
+        this.character.keys[38] = false;
+        console.log("nuveo paso");
+      }
+    });
+
+    document.body.addEventListener(
+      "keyup",
+      e => (this.character.keys[e.keyCode] = false)
+    );
   }
-
-
 }
