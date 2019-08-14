@@ -15,21 +15,28 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <!-- PORTRAIT - YOU MUST HAVE THE MOBILE IN PORTRAIT ORIENTATION-->
+    <div id="portrait">
+      <!-- NO SE PUEDE VER  -->
+    </div>
+
+    <!-- AUDIO DE DENTRO DE LA PÁGINA DE DE INICIO ------------------->
     <audio id="music" autoplay loop>
       <source
         src="sounds/410574__yummie__game-background-music-loop-short.mp3"
         type="audio/mpeg"
       />
     </audio>
-    <!-- SPLASH -->
 
+    <!-- SPLASH ------------------------------------------------------->
     <div id="splash" class="splash">
       <div class="img-splash">
         <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
       </div>
       <button id="start" class="">START</button>
     </div>
-    <!-- GAME OVER -->
+
+    <!-- GAME OVER ---------------------------------------------------->
     <div id="gameover" class="gameover">
       <div class="center">
         <h1>GAME OVER</h1>
@@ -60,7 +67,8 @@
         <button id="start-game-over" class="">START</button>
       </div>
     </div>
-    <!-- WINNER LIST -->
+
+    <!-- WINNER LIST ---------------------------------------------->
     <div id="winner" class="gameover">
       <div>
         <div class="center">
@@ -71,45 +79,104 @@
       </div>
     </div>
 
-    <!-- GAME -->
+    <!-- GAME ------------------------------------------------------>
     <div id="game" class="game">
+      <div>
+        <canvas id="canvas"></canvas>
+      </div>
       <div class="header-score">
         <div class="logo">
           <img src="images/User_Interface/Tittle.png" alt="Game tittle " />
         </div>
         <div class="lives">
           <h3>LIVES</h3>
-          <ul>
-            <li>
-              <img id="live01" src="images/Items_Sprite/Heals/1.png" alt="" />
-            </li>
-            <li>
-              <img id="live02" src="images/Items_Sprite/Heals/1.png" alt="" />
-            </li>
-            <li>
-              <img id="live03" src="images/Items_Sprite/Heals/1.png" alt="" />
-            </li>
-            <li>
-              <img id="live04" src="images/Items_Sprite/Heals/1.png" alt="" />
-            </li>
-            <li>
-              <img id="live05" src="images/Items_Sprite/Heals/1.png" alt="" />
-            </li>
-          </ul>
+            <img id="live01" src="images/Items_Sprite/Heals/1.png" alt="" />
+            <img id="live02" src="images/Items_Sprite/Heals/1.png" alt="" />
+            <img id="live03" src="images/Items_Sprite/Heals/1.png" alt="" />
+            <img id="live04" src="images/Items_Sprite/Heals/1.png" alt="" />
+            <img id="live05" src="images/Items_Sprite/Heals/1.png" alt="" />
         </div>
         <div class="score">
-          <h3>COINS</h3>
-          <div class="text-score" id="tex-score">000</div>
+          <h3>COINS: </h3><span class="text-score" id="tex-score">000</span>
         </div>
         <div class="time">
-          <h3>TIME</h3>
-          <div class="text-time" id="text-time"></div>
+          <h3>TIME: </h3><span class="text-time" id="text-time"></span>
         </div>
       </div>
-      <div>
-        <canvas id="canvas"></canvas>
-      </div>
+      
     </div>
+     
+    <!-- SIGN UP AND LOG IN-->
+    <div class="form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul> 
+      <div class="tab-content">
+        <div id="signup">   
+          <h2>Sign Up for Free</h2>
+          
+          <form action="/" method="post"> 
+              <div class="field-wrap">
+                <label>
+                  First Name<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" />
+              </div>
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email" required autocomplete="off"/>
+            </div>
+            
+            <div class="field-wrap">
+              <label>
+                Set A Password<span class="req">*</span>
+              </label>
+              <input type="password" required autocomplete="off"/>
+            </div>
+            
+            <button type="submit" class="button-form button-block"/>Get Started</button>
+          
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          <h2>Welcome Back!</h2>
+          
+          <form action="/" method="post">
+          
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email"required autocomplete="off"/>
+            </div>
+          
+            <div class="field-wrap">
+              <label>
+                Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off"/>
+            </div>
+            <br>
+            <br>
+            <p class="forgot"><a href="#">Forgot Password?</a></p>
+            <br>
+            <button class="button-form button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      
+    </div> <!-- /form -->
+
+
+    
 
     <script src="src/data.js"></script>
     <script src="src/over.js"></script>

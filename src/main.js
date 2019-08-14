@@ -10,7 +10,7 @@ window.onload = function() {
   let btnCloseListWinner = document.getElementById("list-winner-close");
   let listWinGame = document.getElementById("list-winner-score");
 
-  let scoreData;;
+  let scoreData;
 
   document.getElementById("gameover").style.display = "none"; //none
   document.getElementById("buttons-winer-and-start").style.display = "none";
@@ -93,7 +93,7 @@ window.onload = function() {
     if (valueScore !== null) {
       scoreData.push({
         name: nameUser,
-        value: valueScore
+        value: valueScore,
       });
     }
 
@@ -120,4 +120,51 @@ window.onload = function() {
   }
   createCookie();
   getDataCookies();
+
+  // $(".form")
+  //   .find("input, textarea")
+  //   .on("keyup blur focus", function(e) {
+  //     var $this = $(this),
+  //       label = $this.prev("label");
+
+  //     if (e.type === "keyup") {
+  //       if ($this.val() === "") {
+  //         label.removeClass("active highlight");
+  //       } else {
+  //         label.addClass("active highlight");
+  //       }
+  //     } else if (e.type === "blur") {
+  //       if ($this.val() === "") {
+  //         label.removeClass("active highlight");
+  //       } else {
+  //         label.removeClass("highlight");
+  //       }
+  //     } else if (e.type === "focus") {
+  //       if ($this.val() === "") {
+  //         label.removeClass("highlight");
+  //       } else if ($this.val() !== "") {
+  //         label.addClass("highlight");
+  //       }
+  //     }
+  //   });
+
+  // $(".tab a").on("click", function(e) {
+  //   e.preventDefault();
+
+  //   $(this)
+  //     .parent()
+  //     .addClass("active");
+  //   $(this)
+  //     .parent()
+  //     .siblings()
+  //     .removeClass("active");
+
+  //   target = $(this).attr("href");
+
+  //   $(".tab-content > div")
+  //     .not(target)
+  //     .hide();
+
+  //   $(target).fadeIn(600);
+  // });
 };
