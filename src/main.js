@@ -25,6 +25,19 @@ window.onload = function() {
     gameOver.style.display = "none";
     var widthCanvasGlobal = (canvas.width = 1224);
     var heigthCanvasGlobal = (canvas.height = 650);
+
+    if (gameVisible.requestFullscreen) {
+      gameVisible.requestFullscreen();
+    } else if (gameVisible.mozRequestFullScreen) {
+      /* Firefox */
+      gameVisible.mozRequestFullScreen();
+    } else if (gameVisible.webkitRequestFullscreen) {
+      /* Chrome, Safari & Opera */
+      gameVisible.webkitRequestFullscreen();
+    } else if (gameVisible.msRequestFullscreen) {
+      /* IE/Edge */
+      gameVisible.msRequestFullscreen();
+    }
     game.startGame();
     music.play();
   });
