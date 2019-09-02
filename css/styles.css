@@ -34,7 +34,8 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
   font-family: "Bowlby One SC", cursive;
   color: rgb(243, 255, 5);
 }
@@ -66,7 +67,12 @@ h3 {
 
 h4 {
   font-weight: 300;
-  font-size: 1.8rem;
+  font-size: 1.2vw;
+}
+h5 {
+  font-size: 3vw;
+  text-shadow: 2px 2px rgb(16, 21, 1);
+  display: inline;
 }
 
 button {
@@ -105,6 +111,12 @@ input {
   width: 80%;
   max-width: 300px;
   margin-top: 10%;
+}
+
+.winners {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .header-score {
