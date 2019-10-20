@@ -5,9 +5,14 @@ window.onload = function() {
   let gameOver = document.getElementById("gameover");
   let btnStartOver = document.getElementById("start-game-over");
   let music = document.getElementById("music");
+  let signUpVisible = document.getElementById("signup");
+  let loginVisible = document.getElementById("login");
+
   let btnOkWinner = document.getElementById("name-ok");
   let btnListWinner = document.getElementById("list-winner");
   let btnCloseListWinner = document.getElementById("list-winner-close");
+  let btnLoginShow = document.getElementById("btnLogin");
+  let btnSignupShow = document.getElementById("btnSignup");
   let listWinGame = document.getElementById("list-winner-score");
 
   let scoreData;
@@ -15,9 +20,27 @@ window.onload = function() {
   document.getElementById("gameover").style.display = "none"; //none
   document.getElementById("buttons-winer-and-start").style.display = "none";
   document.getElementById("winner").style.display = "none";
+  document.getElementById("splash").style.display = "";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("signup").style.display = "none";
   let canvas = document.getElementById("canvas");
   let ctx = canvas.getContext("2d");
   let game = new Game(ctx, electrical, gameOverFunc);
+
+  btnSignupShow.addEventListener("click", function() {
+    console.log("estoy dandoles");
+    loginVisible.style.display = "none";
+    signUpVisible.style.display = "";
+    btnLoginShow.classList.remove("active");
+    btnSignupShow.classList.add("active");
+  });
+  btnLoginShow.addEventListener("click", function() {
+    console.log("estoy dandoles");
+    loginVisible.style.display = "";
+    signUpVisible.style.display = "none";
+    btnSignupShow.classList.remove("active");
+    btnLoginShow.classList.add("active");
+  });
 
   btnStart.addEventListener("click", function() {
     gameVisible.style.display = "block";

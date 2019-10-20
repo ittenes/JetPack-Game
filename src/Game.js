@@ -90,13 +90,13 @@ class Game {
         x: element.x,
         y: element.y,
         w: element.w,
-        h: element.h
+        h: element.h,
       };
       let character = {
         x: this.character.x,
         y: this.character.y,
         w: this.character.widthObjet,
-        h: this.character.heightObjet
+        h: this.character.heightObjet,
       };
       if (
         this.collision.detectCollisionElement(plataform, character, this.ctx) &&
@@ -132,13 +132,13 @@ class Game {
         x: element.x,
         y: element.y,
         w: element.w,
-        h: element.h
+        h: element.h,
       };
       let character = {
         x: this.character.x,
         y: this.character.y,
         w: this.character.widthObjet,
-        h: this.character.heightObjet
+        h: this.character.heightObjet,
       };
 
       if (this.collision.detectCollisionElement(coin, character, this.ctx)) {
@@ -152,17 +152,17 @@ class Game {
           }
           this.coinsAll.splice(index, 1);
           if (this.coinsPoints < 10) {
-            document.getElementById("tex-score").innerHTML = `00${
-              this.coinsPoints
-            }`;
+            document.getElementById(
+              "tex-score"
+            ).innerHTML = `00${this.coinsPoints}`;
           } else if (this.coinsPoints >= 10 && this.coinsPoints < 100) {
-            document.getElementById("tex-score").innerHTML = `0${
-              this.coinsPoints
-            }`;
+            document.getElementById(
+              "tex-score"
+            ).innerHTML = `0${this.coinsPoints}`;
           } else {
-            document.getElementById("tex-score").innerHTML = `${
-              this.coinsPoints
-            }`;
+            document.getElementById(
+              "tex-score"
+            ).innerHTML = `${this.coinsPoints}`;
           }
         } else if (element.type === 2) {
           this.lives += 6;
@@ -190,13 +190,13 @@ class Game {
             x: e.lunchRocket.x,
             y: e.lunchRocket.y,
             w: e.lunchRocket.w,
-            h: e.lunchRocket.h
+            h: e.lunchRocket.h,
           };
           let character = {
             x: this.character.x,
             y: this.character.y,
             w: this.character.widthObjet,
-            h: this.character.heightObjet
+            h: this.character.heightObjet,
           };
           if (
             this.collision.detectCollisionRocket(rocket, character, this.ctx) &&
@@ -258,6 +258,8 @@ class Game {
     this.timerGame.startchron = 0;
     //This values
     this.rockets = [];
+    this.numRocket = 3;
+    this.increaseRockets = 1.3;
     this.drawElectric = [];
     this.electrical = electrical;
     this.electricWalls = [];
@@ -328,7 +330,7 @@ class Game {
           statusRocket: 0,
           timer: Math.floor(
             Math.random() * (this.count + 900 - this.count) + this.count
-          )
+          ),
         });
       }
       this.audiosPlayGame("targelocked");
